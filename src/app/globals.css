@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sign-in-link {
+  color: white;
+  background: blue;
+  border-radius: 15px;
+}
