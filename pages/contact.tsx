@@ -1,9 +1,10 @@
 import React from 'react';
-import SignInForm from '../components/SignInForm';
 import "../app/globals.css";
 import Link from 'next/link';
+import ContactUsForm from '@/components/ContactUsForm';
+import Footer from '@/components/Footer';
 
-const signin = () => {
+const contact = () => {
   return (
     <div>
         <header className="flex justify-between items-center  py-4 ">
@@ -12,7 +13,7 @@ const signin = () => {
             <Link href="/home" className="hover:bg-pink-100">Home</Link>
             <Link href="/services" className="hover:bg-pink-100">Services</Link>
             <Link href="/about" className="hover:bg-pink-100">About</Link>
-            <Link href="/contact" className="hover:bg-pink-100">Contact</Link>
+            <Link href="/contact" className="hover:bg-pink-100 text-blue-500">Contact</Link>
             <Link href="/pricing" className="hover:bg-pink-100 ">Pricing</Link>
         </nav>
         <div>
@@ -21,9 +22,10 @@ const signin = () => {
             </Link>
         </div>
         </header>
-        <SignInForm />
+        <ContactUsForm />
+        <Footer />
     </div>
   );
-;}
+};
 
-export default signin;
+export default contact;
