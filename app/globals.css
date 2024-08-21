@@ -7,3 +7,7 @@
   background: blue;
   border-radius: 15px;
 }
+
+.container {
+  display: flex;
+}
