@@ -5,30 +5,30 @@ import Link from 'next/link';
 import Footer from '../components/Footer';
 
 const Services = () => {
-  return (
-    <div className="">
+return (
+    <div className="services">
         <header className="flex justify-between items-center  py-4 ">
         <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
-        <nav className="flex space-x-4">
-            <Link href="/home" className="hover:bg-pink-100">Home</Link>
-            <Link href="/services" className="hover:bg-pink-100 text-blue-500">Services</Link>
-            <Link href="/about" className="hover:bg-pink-100">About</Link>
-            <Link href="/contact" className="hover:bg-pink-100">Contact</Link>
-            <Link href="/pricing" className="hover:bg-pink-100 ">Pricing</Link>
+        <nav className="flex text-center space-x-4">
+            <Link href="/home" className="hover:bg-pink-100 font-bold">Home</Link>
+            <Link href="/services" className="hover:bg-pink-100 font-bold text-blue-500">Services</Link>
+            <Link href="/about" className="hover:bg-pink-100 font-bold">About</Link>
+            <Link href="/contact" className="hover:bg-pink-100 font-bold">Contact</Link>
+            <Link href="/pricing" className="hover:bg-pink-100 font-bold">Pricing</Link>
         </nav>
         <div>
-            <Link href="/signin" className="sign-in-link border border-gray-300 px-4 py-2 hover:bg-pink-100">
+            <Link href="/signin" className="sign-in-link border font-bold border-gray-300 px-4 py-2 hover:bg-pink-100">
             Sign In
             </Link>
         </div>
         </header>
     <main className="mt-8">
         <div className="mb-8 px-10">
-          <h2 className="text-3xl font-bold mb-2">A Great User Experience</h2>
-          <h2 className="text-3xl font-bold mb-2 text-blue-400">Is Our Priority</h2>
-          <p className="mt-4">We create user experience with accessibility in mind.</p>
-          <p>We are here t give modern solutions to the modern problems.</p>
-          <button className="bg-blue-500 justify-center mt-6 hover:bg-pink-100 px-4 py-2 rounded">Our Work</button>
+            <h2 className="text-3xl font-bold mb-2">A Great User Experience</h2>
+            <h2 className="text-3xl font-bold mb-2 text-blue-400">Is Our Priority</h2>
+            <p className="mt-4">We create user experience with accessibility in mind.</p>
+            <p>We are here t give modern solutions to the modern problems.</p>
+            <button className="bg-blue-500 justify-center mt-6 hover:bg-pink-100 px-4 py-2 rounded">Our Work</button>
         </div>
         <section className='mb-12'>
             <div className="flex">
@@ -64,10 +64,10 @@ const Services = () => {
                 <Image src="/picture11.jpg" alt="Web Development" width={400} height={400} className='ml-44'/>
             </div>
         </section>
-      </main>
-      <Footer />
+    </main>
+    <Footer />
     </div>
-  );
+);
 };
 
 export default Services;

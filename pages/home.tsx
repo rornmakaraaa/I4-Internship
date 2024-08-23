@@ -6,22 +6,22 @@ import Footer from '@/components/Footer';
 
 const HomePage = () => {
     return (
-        <div className="">
+        <div className="home">
             <header className="flex justify-between items-center py-4 ">
                 <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
-                <nav className="flex space-x-4">
-                    <Link href="/home" className="hover:bg-pink-100 text-blue-500">Home</Link>
-                    <Link href="/services" className="hover:bg-pink-100">Services</Link>
-                    <Link href="/about" className="hover:bg-pink-100">About</Link>
-                    <Link href="/contact" className="hover:bg-pink-100">Contact</Link>
-                    <Link href="/pricing" className="hover:bg-pink-100 ">Pricing</Link>
+                <nav className="flex text-center space-x-4">
+                    <Link href="/home" className="hover:bg-pink-100 font-bold text-blue-500">Home</Link>
+                    <Link href="/services" className="hover:bg-pink-100 font-bold">Services</Link>
+                    <Link href="/about" className="hover:bg-pink-100 font-bold">About</Link>
+                    <Link href="/contact" className="hover:bg-pink-100 font-bold">Contact</Link>
+                    <Link href="/pricing" className="hover:bg-pink-100 font-bold ">Pricing</Link>
                 </nav>
                 <div>
-                    <Link href="/signin" className="sign-in-link border border-gray-300 px-4 py-2 hover:bg-pink-100">
+                    <Link href="/signin" className="sign-in-link border font-bold border-gray-300 px-4 py-2 hover:bg-pink-100">
                     Sign In
                     </Link>
                 </div>
-             </header>
+            </header>
             <main className="mt-8">
                 <div className="text-center">
                     <h2 className="text-3xl font-bold mb-2">We Help People To</h2>
@@ -43,7 +43,6 @@ const HomePage = () => {
                     <h3 className="text-2xl font-bold mb-4 text-purple-500">Your Business</h3>
                     <h4>Here The Services That We Can Help You</h4>
                     <div className="flex space-x-4">
-                       
                         <div className="bg-white shadow-md rounded-md p-4 text-center">
                             <Image src="/ui.jpg" alt="Web App" width={100} height={100} className="mx-auto" />
                             <h4 className="font-semibold">UX/UI Design</h4>
@@ -126,7 +125,7 @@ const HomePage = () => {
                         <button className="bg-blue-500 mt-8 hover:bg-pink-100 px-4 py-2 rounded">
                             More
                         </button>
-                     </Link>
+                    </Link>
                 </div>
             </main>
             <Footer />
