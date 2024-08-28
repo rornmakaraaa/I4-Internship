@@ -39,7 +39,7 @@ return (
         }}
         onClick={() => setIsAnnual(true)}
         >
-        Annual <span style={{ fontWeight: 'bold' }}>Save 20%</span>
+        Annual <span style={{ fontWeight: 'bold'}}>Save 20%</span>
         </button>
     </div>
     </div>

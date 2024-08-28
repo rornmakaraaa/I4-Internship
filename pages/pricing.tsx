@@ -5,22 +5,23 @@ import PricingToggle from '../components/PricingToggle';
 import Footer from '@/components/Footer';
 
 const pricing = () => {
-  return (
+return (
     <div className="pricing">
-      <header className="flex justify-between items-center  py-4 ">
-      <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
-      <nav className="flex text-center space-x-4">
-        <Link href="/home" className="hover:bg-pink-100 font-bold">Home</Link>
-        <Link href="/services" className="hover:bg-pink-100 font-bold">Services</Link>
-        <Link href="/about" className="hover:bg-pink-100 font-bold">About</Link>
-        <Link href="/contact" className="hover:bg-pink-100 font-bold">Contact</Link>
-        <Link href="/pricing" className="hover:bg-pink-100 font-bold text-blue-500">Pricing</Link>
-      </nav>
-      <div>
+        <header className="flex justify-between items-center  py-4 ">
+            <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
+            <nav className="flex text-center space-x-4">
+                <Link href="/home" className="font-bold">Home</Link>
+                <Link href="/services" className="font-bold">Services</Link>
+                <Link href="/about" className="font-bold">About</Link>
+                <Link href="/contact" className="font-bold">Contact</Link>
+                <Link href="/pricing" className="underline decoration-none group
+                    hover:decoration-blue-200 font-bold text-blue-500">Pricing</Link>
+            </nav>
+    <div>
         <Link href="/signin" className="sign-in-link font-bold border border-gray-300 px-4 py-2 hover:bg-pink-100">
-          Sign In
+        Sign In
         </Link>
-      </div>
+    </div>
     </header>
     <main>
     <PricingToggle />
@@ -45,12 +46,12 @@ const pricing = () => {
             </li>
             </ul>
             <div className="mt-8">
-            <button className="w-full bg-gray-900 text-white py-3 px-6 rounded-lg hover:bg-gray-700">Get Started</button>
+            <button className="w-full bg-gray-900 text-white py-3 px-6 rounded-lg hover:bg-gray-700 mt-12">Get Started</button>
             </div>
         </div>
 
         <div className="bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg shadow-lg p-8">
-            <h3 className="text-2xl font-semibold text-gray-900">$15/month</h3>
+            <h3 className="text-2xl font-semibold text-gray-90">$15/month</h3>
             <p className="mt-4 text-gray-600">Ideal for small businesses.</p>
             <ul className="mt-6 space-y-4">
             <li className="flex items-center">
@@ -103,7 +104,7 @@ const pricing = () => {
     </main>
     <Footer />
     </div>
-  );
+);
 };
 
 export default pricing;

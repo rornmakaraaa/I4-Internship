@@ -10,11 +10,12 @@ const HomePage = () => {
             <header className="flex justify-between items-center py-4 ">
                 <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
                 <nav className="flex text-center space-x-4">
-                    <Link href="/home" className="hover:bg-pink-100 font-bold text-blue-500">Home</Link>
-                    <Link href="/services" className="hover:bg-pink-100 font-bold">Services</Link>
-                    <Link href="/about" className="hover:bg-pink-100 font-bold">About</Link>
-                    <Link href="/contact" className="hover:bg-pink-100 font-bold">Contact</Link>
-                    <Link href="/pricing" className="hover:bg-pink-100 font-bold ">Pricing</Link>
+                    <Link href="/home" className="underline decoration-none group
+                    hover:decoration-blue-200 font-bold text-blue-500">Home</Link>
+                    <Link href="/services" className="font-bold">Services</Link>
+                    <Link href="/about" className="font-bold">About</Link>
+                    <Link href="/contact" className="font-bold">Contact</Link>
+                    <Link href="/pricing" className="font-bold ">Pricing</Link>
                 </nav>
                 <div>
                     <Link href="/signin" className="sign-in-link border font-bold border-gray-300 px-4 py-2 hover:bg-pink-100">
@@ -28,7 +29,7 @@ const HomePage = () => {
                     <h2 className="text-3xl font-bold mb-2 text-purple-500">Shine Online</h2>
                     <p className="mb-6">We are here to help your business to grow and shine online.</p>
                     <Link href="/signin" passHref>
-                        <button className="bg-blue-500 justify-center hover:bg-pink-100 px-4 py-2 rounded">
+                        <button className="bg-blue-400 justify-center hover:bg-pink-100 px-4 py-2 rounded">
                             Get Started
                         </button>
                     </Link>
@@ -90,7 +91,7 @@ const HomePage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-10">
                         <div className="bg-white shadow-md rounded-md overflow-hidden">
-                            <Image src="/snapchat.jpg" alt="SnapChat Clone" 
+                            <Image src="/snapchat.jpg" alt="SnapChat Clone"
                             width={200} height={200} className="w-full h-auto" />
                             <div className="p-4">
                                 <h3 className="font-semibold text-lg mb-2">SnapChat Clone</h3>
@@ -100,7 +101,7 @@ const HomePage = () => {
                             </div>
                         </div>
                         <div className="bg-white shadow-md rounded-md overflow-hidden">
-                            <Image src="/E-learning.jpg" alt="E-Learning App" 
+                            <Image src="/E-learning.jpg" alt="E-Learning App"
                             width={200} height={200} className="w-full h-auto" />
                             <div className="p-4">
                                 <h3 className="font-semibold text-lg mb-2">E-Learning App</h3>
@@ -122,13 +123,13 @@ const HomePage = () => {
                 </div>
                 <div className="flex justify-center">
                     <Link href="/services" passHref>
-                        <button className="bg-blue-500 mt-8 hover:bg-pink-100 px-4 py-2 rounded">
+                        <button className="bg-blue-400 mt-8 hover:bg-pink-100 px-4 py-2 rounded">
                             More
                         </button>
                     </Link>
                 </div>
             </main>
-            <Footer />
+            <Footer/>
         </div>
     );
 };

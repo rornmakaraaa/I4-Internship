@@ -5,16 +5,17 @@ import Image from 'next/image';
 import Footer from '@/components/Footer';
 
 const about = () => {
-  return (
+    return (
     <div className="about">
         <header className="flex justify-between items-center py-4 ">
             <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
                 <nav className="flex text-center space-x-4">
-                    <Link href="/home" className="hover:bg-pink-100 font-bold">Home</Link>
-                    <Link href="/services" className="hover:bg-pink-100 font-bold">Services</Link>
-                    <Link href="/about" passHref className="hover:bg-pink-100 font-bold text-blue-500">About</Link>
-                    <Link href="/contact" className="hover:bg-pink-100 font-bold">Contact</Link>
-                    <Link href="/pricing" className="hover:bg-pink-100 font-bold">Pricing</Link>
+                    <Link href="/home" className="font-bold">Home</Link>
+                    <Link href="/services" className="font-bold">Services</Link>
+                    <Link href="/about" passHref className="underline decoration-none group
+                        hover:decoration-blue-200 font-bold text-blue-500">About</Link>
+                    <Link href="/contact" className="font-bold">Contact</Link>
+                    <Link href="/pricing" className="font-bold">Pricing</Link>
                 </nav>
                 <div>
                     <Link href="/signin" className="sign-in-link border font-bold border-gray-300 px-4 py-2 hover:bg-pink-100">
@@ -30,9 +31,7 @@ const about = () => {
                 <Image src="/picture12.jpg" alt="Our Story" width={300} height={300} className="mx-auto" />
             </div>
             <div className="flex justify-center">
-                <Link href="/pricing" passHref>
-                    <button className="bg-blue-500 text-white w-28 h-10 rounded-2xl hover:bg-pink-100">Our Story</button>
-                </Link>
+                <button className="bg-blue-500 text-white w-28 h-10 rounded-2xl hover:bg-pink-100">Our Story</button>
             </div>
             <section className="mb-12">
                 <div className="flex">
@@ -65,16 +64,16 @@ const about = () => {
                     </div>
                     <div className="flex justify-center">
                     <Link href="/contact" passHref>
-                        <button className="bg-blue-500 mt-4 hover:bg-pink-100 px-4 py-2 rounded">
+                        <button className="text-white bg-blue-500 mt-4 hover:bg-pink-100 px-4 py-2 rounded">
                             Get Started
                         </button>
-                     </Link>
+                    </Link>
                     </div>
             </section>
             </main>
             < Footer />
     </div>
-  )
+)
 }
 
 export default about;

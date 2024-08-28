@@ -1,24 +1,45 @@
 import React from 'react';
-import Link from 'next/link';
+import Image from 'next/image';
 
-const Header = () => {
+export default function Header() {
   return (
-    <header className="flex justify-between items-center  py-4 ">
-    <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
-    <nav className="flex space-x-4">
-        <Link href="/home" className="hover:bg-pink-100 text-bold text-blue-500">Home</Link>
-        <Link href="/services" className="hover:bg-pink-100 text-bold">Services</Link>
-        <Link href="/about" className="hover:bg-pink-100 text-bold">About</Link>
-        <Link href="/contact" className="hover:bg-pink-100 text-bold">Contact</Link>
-        <Link href="/pricing" className="hover:bg-pink-100 text-bold">Pricing</Link>
-    </nav>
-    <div>
-        <Link href="/signin" className="sign-in-link border text-bold border-gray-300 px-4 py-2 hover:bg-pink-100">
-        Sign In
-        </Link>
-    </div>
-  </header>
-  );
-};
-
-export default Header;
+    <header className="header">
+      <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
+      <div className="user-info">
+        <div className="bell-icon">🔔</div>
+        <div className="user-avatar">
+          <img src="/profile.jpg" alt="Mama" />
+        </div>
+        <div className="user-name">Mama</div>
+      </div>
+<style jsx>{`
+  .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  }
+  .user-info {
+  display: flex;
+  align-items: center;
+  }
+  .bell-icon {
+  margin-right: 15px;
+  font-size: 24px;
+  }
+  .user-avatar img {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  }
+  .user-name {
+  font-size: 20px;
+  font-weight: bold;
+  }
+  `}</style>
+</header>
+);
+}
