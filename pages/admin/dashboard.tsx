@@ -1,14 +1,15 @@
 import React from 'react';
-import "../app/globals.css";
+import './dasboard.css';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
-import customerIcon from '../public/person.jpg';
-import projectIcon from '../public/project.jpg';
-import visitorsIcon from '../public/visitors.jpg';
 
-const Dashboard = () => {
+const customerIcon = '/person.jpg';
+const projectIcon = '/project.jpg';
+const visitorsIcon = '/visitors.jpg';
+
+const dashboard = () => {
     return (
-        <div className="dashboard">
+    <div className="dashboard">
             <Header />
             <div className="dashboard-container">
                 <Sidebar />
@@ -20,25 +21,24 @@ const Dashboard = () => {
                             <button className="hover:bg-gray-200">🔍</button>
                         </div>
                     </div>
-
                     <div className="top-cards">
                         <div className="card total-customers">
                             <h3 className="font-bold text-2xl">Total Customers</h3>
                             <p className="font-semibold mt-4 text-2xl">20</p>
                             <p className="font-semibold mt-2 text-xl">Customers</p>
-                            <img src={customerIcon.src} alt="Customer Icon" className="card-icon" />
+                            <img src={customerIcon} alt="Customer Icon" className="card-icon" />
                         </div>
                         <div className="card total-projects">
                             <h3 className="font-bold text-2xl">Total Projects</h3>
                             <p className="font-semibold mt-4 text-2xl">20</p>
                             <p className="font-semibold mt-2 text-xl">Projects</p>
-                            <img src={projectIcon.src} alt="Customer Icon" className="card-icon" />
+                            <img src={projectIcon} alt="Customer Icon" className="card-icon" />
                         </div>
                         <div className="card total-visitors">
                             <h3 className="font-bold text-2xl">Total Visitors</h3>
                             <p className="font-semibold mt-4 text-2xl">20</p>
                             <p className="font-semibold nt-2 text-xl">Visitors</p>
-                            <img src={visitorsIcon.src} alt="Customer Icon" className="card-icon" />
+                            <img src={visitorsIcon} alt="Customer Icon" className="card-icon" />
                         </div>
                     </div>
 
@@ -69,7 +69,7 @@ const Dashboard = () => {
                 </div>
             </div>
         </div>
-    );
-};
+        );
+}
 
-export default Dashboard;
+export default dashboard;

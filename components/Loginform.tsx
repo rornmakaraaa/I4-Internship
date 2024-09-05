@@ -32,7 +32,7 @@ const Loginform = () => {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
 
-                router.push('/dashboard');
+                router.push('/admin/dashboard');
             } else {
                 setError('Invalid credentials, please try again.');
             }
@@ -44,7 +44,7 @@ const Loginform = () => {
 
     return (
         <div className={styles.container}>
-            <h1 className='text-3xl font-bold text-white mb-4'>Welcome to CamAi.Kh</h1>
+            <h1 className='text-3xl font-bold text-white mb-4'>Welcome to CamAi</h1>
             <form onSubmit={handleLogin}>
                 <input
                     type="text"
