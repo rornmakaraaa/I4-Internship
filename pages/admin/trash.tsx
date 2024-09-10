@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import Header from '@/components/Header';
+import Header from '@/components/auths/Header';
 import Sidebar from '@/components/Sidebar';
-import TrashTable from '@/components/authentication/TrashTable';
+import TrashTable from '@/components/admin/TrashTable';
 import { FaBackward } from 'react-icons/fa';
 
 const trash = () => {

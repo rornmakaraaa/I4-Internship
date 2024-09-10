@@ -1,7 +1,7 @@
 import React from 'react';
 import "../app/globals.css";
 import Link from 'next/link';
-import Loginform from '../components/Loginform';
+import Loginform from '../components/auths/Loginform';
 
 const login = () => {
   return (

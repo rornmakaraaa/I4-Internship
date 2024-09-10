@@ -68,7 +68,8 @@ const SignInForm = () => {
                 <div className="mt-4">
                     <p className='text-white ml-48'>Already have an account?
                         <Link href="/login" className="text-blue-700 hover:underline">
-                        Log in</Link></p>
+                        Log in</Link>
+                    </p>
                 </div>
                 <button type="submit" className={styles.button}>Sign Up</button>
             </form>

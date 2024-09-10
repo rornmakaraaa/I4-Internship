@@ -2,7 +2,7 @@ import React from 'react';
 import "../app/globals.css";
 import Link from 'next/link';
 import Image from 'next/image';
-import Footer from '@/components/Footer';
+import Footer from '@/components/auths/Footer';
 
 const HomePage = () => {
     return (
@@ -29,7 +29,7 @@ const HomePage = () => {
                     <h2 className="text-3xl font-bold mb-2 text-purple-500">Shine Online</h2>
                     <p className="mb-6">We are here to help your business to grow and shine online.</p>
                     <Link href="/signin" passHref>
-                        <button className="bg-blue-400 justify-center hover:bg-pink-100 px-4 py-2 rounded">
+                        <button className="bg-blue-700 justify-center text-white hover:bg-pink-100 px-4 py-2 rounded">
                             Get Started
                         </button>
                     </Link>
@@ -111,11 +111,11 @@ const HomePage = () => {
                             </div>
                         </div>
                         <div className="bg-white shadow-md rounded-md overflow-hidden">
-                            <Image src="/Production.jpg" alt="Drumolotion Production" 
+                            <Image src="/Production.jpg" alt="Drumolotion Production"
                             width={200} height={200} className="w-full h-auto" />
                             <div className="p-4">
                                 <h3 className="font-semibold text-lg mb-2">Drumolotion Production</h3>
-                                <Link href="/projects/drumolotion-production" className="text-blue-500 hover:underline">
+                                <Link href="/projects/drumolotion-production" className="text-blue-700 hover:underline">
                                     View Project
                                 </Link>
                             </div>
@@ -123,7 +123,7 @@ const HomePage = () => {
                 </div>
                 <div className="flex justify-center">
                     <Link href="/services" passHref>
-                        <button className="bg-blue-400 mt-8 hover:bg-pink-100 px-4 py-2 rounded">
+                        <button className="bg-blue-700 mt-8 text-white hover:bg-pink-100 px-4 py-2 rounded">
                             More
                         </button>
                     </Link>

@@ -2,7 +2,7 @@ import React from 'react';
 import "../app/globals.css";
 import Link from 'next/link';
 import ContactUsForm from '@/components/ContactUsForm';
-import Footer from '@/components/Footer';
+import Footer from '@/components/auths/Footer';
 
 const contact = () => {
   return (

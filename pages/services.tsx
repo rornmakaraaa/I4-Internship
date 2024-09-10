@@ -2,7 +2,7 @@ import React from 'react';
 import "../app/globals.css";
 import Image from 'next/image';
 import Link from 'next/link';
-import Footer from '../components/Footer';
+import Footer from '../components/auths/Footer';
 
 const Services = () => {
 return (
@@ -24,12 +24,16 @@ return (
         </div>
         </header>
     <main className="mt-8">
-        <div className="mb-8 px-10">
+        <div className="mb-8 flex flex-col items-center justify-center">
             <h2 className="text-3xl font-bold mb-2">A Great User Experience</h2>
             <h2 className="text-3xl font-bold mb-2 text-blue-400">Is Our Priority</h2>
             <p className="mt-4">We create user experience with accessibility in mind.</p>
-            <p>We are here t give modern solutions to the modern problems.</p>
-            <button className="bg-blue-400 justify-center mt-6 hover:bg-pink-100 px-4 py-2 rounded">Our Work</button>
+            <p>We are here to give modern solutions to the modern problems.</p>
+            <Link href="/works" passHref>
+            <button className="bg-blue-700 text-white justify-center mt-6
+            hover:bg-gray-400 px-4 py-2 rounded">Our Work</button>
+            </Link>
+            <Image src="/work1.jpg" alt="Web Development" width={400} height={400}/>
         </div>
         <section className='mb-12'>
             <div className="flex">
@@ -38,7 +42,8 @@ return (
                     <h3 className="text-2xl font-bold text-blue-400 mt-2">Website and Web App Development</h3>
                     <p className="mt-4">A Website is something that gives you and Your Business a web presence. </p>
                     <p>Here at CamAi, We exactly take care of that.</p>
-                    <button className="bg-blue-400 justify-center mt-5 hover:bg-pink-100 px-4 py-2 rounded">More</button>
+                    <button className="bg-blue-700 text-white justify-center mt-5
+                    hover:bg-gray-400 px-4 py-2 rounded">More</button>
                 </div>
                 <Image src="/picture9.jpg" alt="Web Development" width={400} height={400} className='ml-44'/>
             </div>
@@ -48,19 +53,21 @@ return (
                 <div className="ml-80 mt-8">
                     <h2 className="text-2xl font-bold">Progressive Web Apps</h2>
                     <h2 className="text-2xl font-bold text-blue-400">Progressive web app development</h2>
-                    <p className="mt-4">Progressive web apps are the future of modern web and we understand that as</p>
-                    <p>We've been working with those</p>
-                    <button className="bg-blue-400 justify-center mt-5 hover:bg-pink-100 px-4 py-2 rounded">More</button>
+                    <p className="mt-4">Progressive web apps are the future of
+                        modern web</p>
+                    <p>and we understand that as We've been working with those</p>
+                    <button className="bg-blue-700 text-white justify-center mt-5 hover:bg-gray-400 px-4 py-2 rounded">More</button>
                 </div>
             </div>
 
             <div className="flex">
                 <div className='px-10 mt-8'>
-                    <h3 className="text-2xl font-bold">Web Development</h3>
-                    <h3 className="text-2xl font-bold text-blue-400 mt-2">Website and Web App Development</h3>
-                    <p className="mt-4">A Website is something that gives you and Your Business a web presence. </p>
-                    <p>Here at CamAi, We exactly take care of that.</p>
-                    <button className="bg-blue-400 justify-center mt-5 hover:bg-pink-100 px-4 py-2 rounded">More</button>
+                    <h3 className="text-2xl font-bold">User interface Design</h3>
+                    <h3 className="text-2xl font-bold text-blue-400 mt-2">User interface and User experience design</h3>
+                    <p className="mt-4">As a Design focused digital agency we are highly</p>
+                    <p>concerned about the overall product design.</p>
+                    <button className="bg-blue-700 text-white justify-center mt-5
+                    hover:bg-gray-400 px-4 py-2 rounded">More</button>
                 </div>
                 <Image src="/picture11.jpg" alt="Web Development" width={400} height={400} className='ml-44'/>
             </div>

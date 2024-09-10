@@ -41,7 +41,7 @@ export default function Sidebar() {
                             className={`flex items-center text-lg p-3 rounded-lg
                                 ${activeLink === '/user-management' ? 'bg-gray-500 text-white' : 'text-black'}`}>
                                 <FaUsersCog className="mr-2" />
-                                User Management
+                                User
                             </a>
                         </Link>
                     </li>
@@ -51,7 +51,7 @@ export default function Sidebar() {
                             className={`flex items-center text-lg p-3 rounded-lg
                                 ${activeLink === '/team-management' ? 'bg-gray-500 text-white' : 'text-black'}`}>
                                 <FaUsersCog className="mr-2" />
-                                Team Management
+                                Team
                             </a>
                         </Link>
                     </li>
@@ -61,7 +61,7 @@ export default function Sidebar() {
                             className={`flex items-center text-lg p-3 rounded-lg
                                 ${activeLink === '/chat-user' ? 'bg-gray-500 text-white' : 'text-black'}`}>
                                 <FaUserCircle className="mr-2" />
-                                Chat User
+                                Chat
                             </a>
                         </Link>
                     </li>

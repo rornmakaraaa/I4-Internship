@@ -1,8 +1,8 @@
 import React from 'react';
 import './dasboard.css';
-import Header from '@/components/Header';
+import Header from '@/components/auths/Header';
 import Sidebar from '@/components/Sidebar';
-import ProjectTable from '@/components/authentication/ProjectTable';
+import ProjectTable from '@/components/admin/ProjectTable';
 import Link from 'next/link';
 
 const projects = () => {

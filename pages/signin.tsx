@@ -1,5 +1,5 @@
 import React from 'react';
-import SignInForm from '../components/SignInForm';
+import SignInForm from '../components/auths/SignInForm';
 import "../app/globals.css";
 import Link from 'next/link';
 
@@ -16,9 +16,8 @@ const signin = () => {
             <Link href="/pricing" className="font-bold">Pricing</Link>
         </nav>
         <div>
-            <Link href="/signin" className="sign-in-link font-bold border border-gray-300 px-4 py-2 hover:bg-pink-100">
-            Sign In
-            </Link>
+            <Link href="/signin" className="sign-in-link font-bold border border-gray-300 px-4 py-2
+            hover:bg-pink-100">Sign In</Link>
         </div>
         </header>
         <SignInForm />

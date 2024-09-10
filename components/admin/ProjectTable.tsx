@@ -3,7 +3,7 @@ import React from "react";
 type Project = {
     title: string;
     type: string;
-    status: "Done" | "In Progress";
+    status: "Completed" | "In Progress";
     team: string[];
 };
 
@@ -11,7 +11,7 @@ const projects: Project[] = [
     {
         title: "Hotel Management System",
         type: "Web Development",
-        status: "Done",
+        status: "Completed",
         team: ["/profile.jpg", "/user2.jpg", "/user3.jpg"],
     },
     {
@@ -23,7 +23,7 @@ const projects: Project[] = [
     {
         title: "Hotel Management System",
         type: "Mobile Development",
-        status: "Done",
+        status: "Completed",
         team: ["/user2.jpg", "/user3.jpg", "/profile.jpg"],
     },
     {
@@ -35,7 +35,7 @@ const projects: Project[] = [
     {
         title: "Progressive Web Apps",
         type: "UX/UI Design",
-        status: "Done",
+        status: "Completed",
         team: ["/user1.jpg", "/user2.jpg", "/profile.jpg"],
     },
     {
@@ -67,7 +67,7 @@ const ProjectTable: React.FC = () => {
                             <td className="px-9 py-2 ">
                                 <span
                                     className={`inline-block py-1 px-2 rounded-full text-white ${
-                                    project.status === "Done" ? "bg-green-600 text-green-700" :
+                                    project.status === "Completed" ? "bg-green-600 text-green-700" :
                                     "bg-yellow-200 text-yellow-700"}`}>
                                     {project.status}
                                 </span>

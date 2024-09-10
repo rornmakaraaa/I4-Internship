@@ -5,7 +5,7 @@ import {FaRecycle, FaTrash} from 'react-icons/fa';
 type TrashTable = {
     title: string;
     type: string;
-    status: "Done" | "In Progress";
+    status: "Completed" | "In Progress";
     team: string[];
     deleteOn: string[];
 };
@@ -14,7 +14,7 @@ const projects: TrashTable[] = [
     {
         title: "Hotel Management System",
         type: "Web Development",
-        status: "Done",
+        status: "Completed",
         team: ["/profile.jpg", "/user2.jpg", "/user3.jpg"],
         deleteOn:["29.08.2024"],
     },
@@ -49,7 +49,7 @@ const TrashTable: React.FC =() => {
                             <td className="px-9 py-2 ">
                                 <span
                                     className={`inline-block py-1 px-2 rounded-full text-white ${
-                                    project.status === "Done" ? "bg-green-600 text-green-700" :
+                                    project.status === "Completed" ? "bg-green-600 text-green-700" :
                                     "bg-yellow-200 text-yellow-700"}`}>
                                     {project.status}
                                 </span>

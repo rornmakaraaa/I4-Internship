@@ -2,7 +2,7 @@ import React from 'react';
 import "../app/globals.css";
 import Link from 'next/link';
 import PricingToggle from '../components/PricingToggle';
-import Footer from '@/components/Footer';
+import Footer from '@/components/auths/Footer';
 
 const pricing = () => {
 return (
