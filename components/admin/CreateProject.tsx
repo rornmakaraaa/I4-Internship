@@ -22,12 +22,10 @@ const CreateProject = () => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log('Form data:', formData);
-
-        router.push('/admin/projects');
     };
 
     const handleBack = () => {
-        router.push('/admin/projects');
+        router.back();
     };
 
     return (
@@ -37,8 +35,7 @@ const CreateProject = () => {
                 <button
                     onClick={handleBack}
                     className="text-gray-500 hover:text-gray-800 text-4xl"
-                    aria-label="Back to Projects"
-                >
+                    aria-label="Back to Projects">
                     &times;
                 </button>
             </div>
@@ -51,8 +48,7 @@ const CreateProject = () => {
                         value={formData.projectTitle}
                         onChange={handleChange}
                         className="w-full border border-gray-300 p-2 rounded"
-                        placeholder="Project Title"
-                    />
+                        placeholder="Project Title"/>
                 </div>
                 <div className="project-type">
                     <select
@@ -60,8 +56,7 @@ const CreateProject = () => {
                         name="projectType"
                         value={formData.projectType}
                         onChange={handleChange}
-                        className="w-full border border-gray-300 p-2 rounded"
-                    >
+                        className="w-full border border-gray-300 p-2 rounded">
                         <option value="">Project Type</option>
                         <option value="Design">Design</option>
                         <option value="Web">Web Development</option>
@@ -77,8 +72,7 @@ const CreateProject = () => {
                         value={formData.startDate}
                         onChange={handleChange}
                         className="w-full border border-gray-300 p-2 rounded"
-                        placeholder="Start Date"
-                    />
+                        placeholder="Start Date"/>
                     <input
                         type="date"
                         id="endDate"
@@ -86,8 +80,7 @@ const CreateProject = () => {
                         value={formData.endDate}
                         onChange={handleChange}
                         className="w-full border border-gray-300 p-2 rounded"
-                        placeholder="End Date"
-                    />
+                        placeholder="End Date"/>
                 </div>
                 <div className="team">
                     <select
@@ -95,8 +88,7 @@ const CreateProject = () => {
                         name="team"
                         value={formData.team}
                         onChange={handleChange}
-                        className="w-full border border-gray-300 p-2 rounded"
-                    >
+                        className="w-full border border-gray-300 p-2 rounded">
                         <option value="">Team</option>
                         <option value="Design">Design</option>
                         <option value="Web">Web</option>
@@ -110,8 +102,7 @@ const CreateProject = () => {
                         name="status"
                         value={formData.status}
                         onChange={handleChange}
-                        className="w-full border border-gray-300 p-2 rounded"
-                    >
+                        className="w-full border border-gray-300 p-2 rounded">
                         <option value="">Status</option>
                         <option value="Completed">Completed</option>
                         <option value="In Progress">In Progress</option>
@@ -133,14 +124,12 @@ const CreateProject = () => {
                     <button
                         type="button"
                         onClick={handleBack}
-                        className="bg-gray-400 hover:bg-gray-600 text-gray-700 py-2 px-4 rounded"
-                    >
+                        className="bg-gray-400 hover:bg-gray-600 text-black py-2 px-4 rounded">
                         Cancel
                     </button>
                     <button
                         type="submit"
-                        className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
-                    >
+                        className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">
                         Create
                     </button>
                 </div>
