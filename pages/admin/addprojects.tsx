@@ -9,8 +9,7 @@ const AddProjects = () => {
         <Header />
         <div className="project-contents flex">
             <Sidebar />
-            <div className="main flex-grow p-5">
-                <h2 className="font-bold text-3xl mb-4">Create Project</h2>
+            <div className="create-project main flex-grow p-5">
                 <CreateProject />
             </div>
         </div>

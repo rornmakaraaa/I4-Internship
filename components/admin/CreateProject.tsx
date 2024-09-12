@@ -1,125 +1,151 @@
-import {useState } from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const CreateProject = () => {
-        const [formData, setFormData] = useState({
-            projectTitle: '',
-            projectType: '',
-            startDate: '',
-            endDate: '',
-            description: '',
-            team: '',
-            status: '',
-        });
-        const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-            const { name, value } = e.target;
-            setFormData({...formData,[name]: value,});
-        };
+    const router = useRouter();
 
-        const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-            console.log('Form data:', formData);
-        };
-        return (
-            <div className="flex items-center">
-                <form onSubmit={handleSubmit}
-                className="bg-white p-8 rounded-lg shadow-lg w-full">
-                <div className="mb-2">
-                    <label className="block mb-2 font-semibold" htmlFor="projectTitle">Title</label>
+    const [formData, setFormData] = useState({
+        projectTitle: '',
+        projectType: '',
+        startDate: '',
+        endDate: '',
+        description: '',
+        team: '',
+        status: '',
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log('Form data:', formData);
+
+        router.push('/admin/projects');
+    };
+
+    const handleBack = () => {
+        router.push('/admin/projects');
+    };
+
+    return (
+        <div className="relative p-8 w-full mx-auto bg-white rounded-lg shadow-lg">
+            <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold">Create Projects</h2>
+                <button
+                    onClick={handleBack}
+                    className="text-gray-500 hover:text-gray-800 text-4xl"
+                    aria-label="Back to Projects"
+                >
+                    &times;
+                </button>
+            </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="project-tittle">
                     <input
-                    type="text"
-                    id="projectTitle"
-                    name="projectTitle"
-                    value={formData.projectTitle}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 p-2 rounded"
-                    placeholder="Enter project title"/>
+                        type="text"
+                        id="projectTitle"
+                        name="projectTitle"
+                        value={formData.projectTitle}
+                        onChange={handleChange}
+                        className="w-full border border-gray-300 p-2 rounded"
+                        placeholder="Project Title"
+                    />
                 </div>
-                <div className="mb-2">
-                    <label className="block mb-2 font-semibold" htmlFor="projectType">Type</label>
+                <div className="project-type">
                     <select
-                    id="projectType"
-                    name="projectType"
-                    value={formData.projectType}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 p-2 rounded">
-                        <option value="Select">Select project type</option>
+                        id="projectType"
+                        name="projectType"
+                        value={formData.projectType}
+                        onChange={handleChange}
+                        className="w-full border border-gray-300 p-2 rounded"
+                    >
+                        <option value="">Project Type</option>
                         <option value="Design">Design</option>
                         <option value="Web">Web Development</option>
                         <option value="Mobile">Mobile Development</option>
-                        <option value="software">Software Development</option>
+                        <option value="Software">Software Development</option>
                     </select>
                 </div>
-                <div className="flex space-x-10 justify-between">
-                    <div className="mb-2">
-                        <label className="block mb-2 font-semibold" htmlFor="startDate">Start Date</label>
-                        <input
+                <div className="date flex space-x-4">
+                    <input
                         type="date"
                         id="startDate"
                         name="startDate"
                         value={formData.startDate}
                         onChange={handleChange}
-                        className="w-full border border-gray-300 p-2 rounded"/>
-                    </div>
-                    <div className="mb-2">
-                        <label className="block mb-2 font-semibold" htmlFor="endDate">End Date</label>
-                        <input
+                        className="w-full border border-gray-300 p-2 rounded"
+                        placeholder="Start Date"
+                    />
+                    <input
                         type="date"
                         id="endDate"
                         name="endDate"
                         value={formData.endDate}
                         onChange={handleChange}
-                        className="w-full border border-gray-300 p-2 rounded"/>
-                    </div>
+                        className="w-full border border-gray-300 p-2 rounded"
+                        placeholder="End Date"
+                    />
                 </div>
-                <div className="mb-2">
-                    <label className="block mb-2 font-semibold" htmlFor="status">Team</label>
+                <div className="team">
                     <select
-                    id="team"
-                    name="team"
-                    value={formData.team}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 p-2 rounded">
-                        <option value="">Select team</option>
-                        <option value="design">Design team</option>
-                        <option value="web">Web team</option>
-                        <option value="mobile">Mobile team</option>
-                        <option value="software">Software team</option>
+                        id="team"
+                        name="team"
+                        value={formData.team}
+                        onChange={handleChange}
+                        className="w-full border border-gray-300 p-2 rounded"
+                    >
+                        <option value="">Team</option>
+                        <option value="Design">Design</option>
+                        <option value="Web">Web</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="Software">Software</option>
                     </select>
                 </div>
-                <div className="mb-2">
-                    <label className="block mb-2 font-semibold" htmlFor="status">Status</label>
+                <div className="status">
                     <select
-                    id="status"
-                    name="status"
-                    value={formData.status}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 p-2 rounded">
-                        <option value="">Select status</option>
-                        <option value="Active">Completed</option>
-                        <option value="Completed">In Progress</option>
+                        id="status"
+                        name="status"
+                        value={formData.status}
+                        onChange={handleChange}
+                        className="w-full border border-gray-300 p-2 rounded"
+                    >
+                        <option value="">Status</option>
+                        <option value="Completed">Completed</option>
+                        <option value="In Progress">In Progress</option>
                     </select>
                 </div>
-                <div className="mb-2">
-                    <label className="block mb-2 font-semibold" htmlFor="description">Description</label>
+                <div className="description">
                     <textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 p-2 rounded"
-                    rows={4}
-                    placeholder="Enter project description"></textarea>
+                        id="description"
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        className="w-full border border-gray-300 p-2 rounded"
+                        rows={3}
+                        placeholder="Description"
+                    ></textarea>
                 </div>
-                <div className="flex space-x-10 justify-between">
-                    <button type="button" className="bg-gray-500 hover:bg-gray-300 text-white py-2 px-4 rounded">
+
+                <div className="flex justify-between">
+                    <button
+                        type="button"
+                        onClick={handleBack}
+                        className="bg-gray-400 hover:bg-gray-600 text-gray-700 py-2 px-4 rounded"
+                    >
                         Cancel
                     </button>
-                    <button type="submit" className="bg-blue-700 hover:bg-gray-500 text-white py-2 px-4 rounded">
+                    <button
+                        type="submit"
+                        className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded"
+                    >
                         Create
                     </button>
                 </div>
             </form>
-            </div>
+        </div>
     );
 };
 

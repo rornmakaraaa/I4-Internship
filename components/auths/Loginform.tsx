@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import styles from './Loginform.module.css';
+import styles from '../styles/Loginform.module.css';
 
 const Loginform = () => {
     const router = useRouter();

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import './dasboard.css';
+import '../styles/dasboard.css';
 import Header from '@/components/auths/Header';
 import Sidebar from '@/components/Sidebar';
 

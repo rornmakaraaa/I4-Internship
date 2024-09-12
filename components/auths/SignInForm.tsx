@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import styles from './SignInForm.module.css';
+import styles from '../styles/SignInForm.module.css';
 import Link from 'next/link';
 
 const SignInForm = () => {

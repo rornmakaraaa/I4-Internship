@@ -12,7 +12,7 @@ export default function Sidebar() {
     };
 
     return (
-        <div className="w-72 h-auto bg-white p-5 shadow-lg">
+        <div className="w-72 h-auto p-5 shadow-lg bg-white">
             <nav>
                 <ul className="list-none p-0">
                     <li className="mb-2">
@@ -76,20 +76,20 @@ export default function Sidebar() {
                         </Link>
                     </li>
                     <li className="mb-16">
-                        <Link href="/admin/reporting" legacyBehavior>
-                            <a onClick={() => handleLinkClick('/reporting')}
+                        <Link href="/admin/report" legacyBehavior>
+                            <a onClick={() => handleLinkClick('/report')}
                             className={`flex items-center text-lg p-3 rounded-lg
-                                ${activeLink === '/reporting' ? 'bg-gray-500 text-white' : 'text-black'}`}>
+                                ${activeLink === '/report' ? 'bg-gray-500 text-white' : 'text-black'}`}>
                                 <FaChartPie className="mr-2" />
                                 Reporting
                             </a>
                         </Link>
                     </li>
                     <li className="log">
-                        <Link href="/admin/Logout" legacyBehavior>
-                            <a onClick={() => handleLinkClick('/Logout')}
+                        <Link href="/admin/logout" legacyBehavior>
+                            <a onClick={() => handleLinkClick('/logout')}
                             className={`flex items-center text-lg p-3 rounded-lg
-                                ${activeLink === '/Logout' ? 'bg-gray-500' : 'text-red-600'}`}>
+                                ${activeLink === '/logout' ? 'bg-gray-500' : 'text-red-600'}`}>
                                 <FaSignOutAlt className="mr-2" />
                                 Log Out
                             </a>

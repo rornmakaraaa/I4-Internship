@@ -1,4 +1,5 @@
 import React from "react";
+import {FaEdit, FaTrash} from 'react-icons/fa';
 
 type Project = {
     title: string;
@@ -86,12 +87,8 @@ const ProjectTable: React.FC = () => {
                             </td>
                             <td className="py-2 justify-end">
                                 <div className="flex space-x-2">
-                                    <button className="text-blue-500 hover:text-blue-700">
-                                        ✏️
-                                    </button>
-                                    <button className="text-red-500 hover:text-red-700">
-                                        🗑️
-                                    </button>
+                                    <FaEdit style={{ color: 'blue' }}/>
+                                    <FaTrash style={{ color: 'red' }} />
                                 </div>
                             </td>
                         </tr>
