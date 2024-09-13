@@ -59,7 +59,7 @@ export default function Sidebar() {
                         <Link href="/admin/chat-user" legacyBehavior>
                             <a onClick={() => handleLinkClick('/chat-user')}
                             className={`flex items-center text-lg p-3 rounded-lg
-                                ${activeLink === '/chat-user' ? 'bg-gray-500 text-white' : 'text-black'}`}>
+                                ${activeLink === '/chat' ? 'bg-gray-500 text-white' : 'text-black'}`}>
                                 <FaUserCircle className="mr-2" />
                                 Chat
                             </a>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-
+import {FaEdit,FaTrash, FaUser } from "react-icons/fa";
 interface User {
   id: number;
   name: string;
@@ -55,20 +55,23 @@ const Options: React.FC<VerticalOptionsProps> = ({ user }) => {
       {isOpen && (
         <div
           ref={dropdownRef}
-          className="absolute right-0 bg-white shadow-lg w-32 z-10 transition-opacity duration-300 ease-in-out">
+          className="absolute right-0 bg-white shadow-lg w-36 z-10 transition-opacity duration-300 ease-in-out">
           <button
             onClick={handleEdit}
-            className="w-full text-left px-4 py-2 hover:bg-gray-100">
+            className="flex flex-row w-full text-left px-4 py-2 hover:bg-gray-100">
+              <FaEdit className="mr-2 mt-1" />
             Edit
           </button>
           <button
             onClick={handleDelete}
-            className="w-full text-left px-4 py-2 hover:bg-gray-100">
+            className="flex flex-row w-full text-center px-4 py-2 hover:bg-gray-100">
+              <FaTrash className="mr-2 mt-1"/>
             Delete
           </button>
           <button
             onClick={handleViewProfile}
-            className="w-full text-left px-4 py-2 hover:bg-gray-100">
+            className="flex flex-row w-full text-left px-4 py-2 hover:bg-gray-100 whitespace-nowrap">
+              <FaUser className="mr-2 mt-1"/>
             View Profile
           </button>
         </div>

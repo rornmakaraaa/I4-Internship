@@ -9,9 +9,9 @@ const CreateProject = () => {
         projectType: '',
         startDate: '',
         endDate: '',
-        description: '',
         team: '',
         status: '',
+        description: '',
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
