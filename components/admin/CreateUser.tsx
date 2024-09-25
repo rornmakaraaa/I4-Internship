@@ -10,7 +10,7 @@ const CreateUser = () => {
         window.history.back();
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('name', name);

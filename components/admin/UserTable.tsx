@@ -25,7 +25,7 @@ const UserTable = () => {
             id: 3,
             name: 'Lala Lisa',
             email: 'lalalisa@gmail.com',
-            role: 'customer',
+            role: 'manager',
             lastActive: '29.08.2024',
             dateAdded: '11.07.2024',
             image:'/profile.jpg'
@@ -34,7 +34,7 @@ const UserTable = () => {
             id: 4,
             name: 'Park Rose',
             email: 'parkrose@gmail.com',
-            role: 'customer',
+            role: 'admin',
             lastActive: '16.07.2024',
             dateAdded: '07.06.2024',
             image:'/user3.jpg'

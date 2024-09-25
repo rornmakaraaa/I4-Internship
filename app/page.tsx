@@ -1,4 +1,3 @@
-import Image from "next/image";
 import HomePage from "@/pages/home";
 import "./globals.css"
 
@@ -6,7 +5,7 @@ import "./globals.css"
 
 
 
-export default function Home() {
+export default function index() {
   return (
     <main>
     <HomePage />

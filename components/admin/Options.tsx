@@ -59,13 +59,13 @@ const Options: React.FC<VerticalOptionsProps> = ({ user }) => {
           <button
             onClick={handleEdit}
             className="flex flex-row w-full text-left px-4 py-2 hover:bg-gray-100">
-              <FaEdit className="mr-2 mt-1" />
+              <FaEdit className="mr-2 mt-1" style={{ color: 'blue' }}/>
             Edit
           </button>
           <button
             onClick={handleDelete}
             className="flex flex-row w-full text-center px-4 py-2 hover:bg-gray-100">
-              <FaTrash className="mr-2 mt-1"/>
+              <FaTrash className="mr-2 mt-1" style={{ color: 'red' }}/>
             Delete
           </button>
           <button
