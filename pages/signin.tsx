@@ -3,24 +3,24 @@ import "../app/globals.css";
 import React, { useState } from 'react';
 
 const Signup: React.FC = () => {
-  // State variables for input fields and feedback messages
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Function to handle form submission
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/api/signup', { // Update this URL to your signup endpoint
+      const response = await fetch('http://localhost:8000/api/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username: name, email, password }), // Send name, email, and password
+        body: JSON.stringify({ username: name, email, password }),
       });
 
       const data = await response.json();
@@ -43,7 +43,6 @@ const Signup: React.FC = () => {
     <div className="flex justify-center items-center bg-primary h-screen">
       <div className="bg-gray-50 p-6 rounded-lg w-1/3">
         <h2 className="text-center font-bold mb-4">Sign Up</h2>
-        
         {/* Show error or success messages */}
         {error && <p className="text-red-600 text-center mb-4">{error}</p>}
         {success && <p className="text-green-600 text-center mb-4">{success}</p>}
@@ -51,13 +50,13 @@ const Signup: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
-              Name
+              Username
             </label>
             <input
               className="border py-2 px-2 form-input mt-1 block w-full rounded-md border-gray-200 shadow-sm"
-              id="name"
+              id="username"
               type="text" // Corrected to text
-              placeholder="Please Enter Name"
+              placeholder="Please Enter Username"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required

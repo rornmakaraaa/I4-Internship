@@ -44,7 +44,7 @@ const UserTable = () => {
     return (
         <div className="container mx-auto mt-4">
             <table className="min-w-full bg-white shadow-md rounded table-fixed">
-                <thead className="bg-gray-300 border-b border-gray-300 text-left h-10 rounded-lg">
+                <thead className="bg-gray-200 border-b border-gray-300 text-left h-10 rounded-lg">
                     <tr>
                         <th className="py-2 px-4">Image</th>
                         <th className="py-2 px-4">Name</th>

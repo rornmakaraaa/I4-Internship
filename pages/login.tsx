@@ -10,12 +10,12 @@ const Login: React.FC = () => {
   const [success, setSuccess] = useState('');
   const router = useRouter();
 
-  // Add typing for event (React.FormEvent)
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/api/login', {
+      const response = await fetch('http://localhost:8000/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ const Login: React.FC = () => {
   return (
     <div className="flex justify-center items-center bg-primary h-screen">
       <div className="bg-gray-50 p-6 rounded-lg w-1/3">
-        <h2 className="text-center mb-4"><strong>Sign-In</strong></h2>
+        <h2 className="text-center mb-4"><strong>Log In</strong></h2>
         {error && <p className="text-red-600 text-center mb-4">{error}</p>}
         {success && <p className="text-green-600 text-center mb-4">{success}</p>}
         <form onSubmit={handleSubmit}>

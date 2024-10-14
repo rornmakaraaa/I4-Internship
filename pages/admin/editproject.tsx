@@ -91,11 +91,10 @@ const CreateProject = () => {
                         onChange={handleChange}
                         className="w-full border border-gray-300 p-2 rounded">
                         <option value="">Project Type</option>
-                        <option value="Design">UX/UI Design</option>
+                        <option value="Design">Design</option>
                         <option value="Web">Web Development</option>
                         <option value="Mobile">Mobile Development</option>
-                        <option value="Software">Software Customize</option>
-                        <option value="Software">Progressive Web Apps</option>
+                        <option value="Software">Software Development</option>
                     </select>
                 </div>
                 <div className="date flex space-x-4">

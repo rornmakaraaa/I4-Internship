@@ -4,39 +4,49 @@ import Header from '@/components/auths/Header';
 import Sidebar from '@/components/Sidebar';
 import ProjectTable from '@/components/admin/ProjectTable';
 import Link from 'next/link';
+import { FaSearch } from "react-icons/fa";
 
 const projects = () => {
     return (
-    <div className="project flex flex-col w-auto">
-        <Header />
-        <div className="project-container flex">
-        <Sidebar />
-        <div className="main flex-grow p-5">
-            <div className="top-bar flex">
-                <h2 className="font-bold text-3xl">Projects</h2>
-                <div>
-                    <Link href="/admin/addprojects" className="bg-blue-700 p-2 rounded-lg
-                    text-white font-semibold hover:bg-gray-500"
-                    >+ Add Projects</Link>
+        <div className="project flex flex-col w-auto">
+            <Header />
+            <div className="project-container flex">
+                <Sidebar />
+                <div className="main flex-grow p-5">
+                    <div className="top-bar flex">
+                        <h2 className="font-bold text-3xl">Projects</h2>
+                    </div>
+                    <div className="flex items-center justify-between mb-4">
+                        <div className="flex">
+                            <Link href="/admin/projects"
+                                className="bg-blue-700 text-white font-semibold py-2 px-4 hover:bg-gray-500 rounded-l-lg">
+                                All Projects
+                            </Link>
+                            <Link href="/admin/trash"
+                                className="bg-gray-200 text-gray-700 font-semibold py-2 px-4 hover:bg-gray-500 rounded-r-lg">
+                                Trash
+                            </Link>
+                        </div>
+                        <div className="flex items-center ml-4">
+                            <button className="flex items-center bg-gray-200 rounded-lg py-2 px-2">
+                                <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    className="border-none outline-none bg-transparent w-24" />
+                                <FaSearch className="text-gray-500 ml-2" style={{ fontSize: '20px' }} />
+                            </button>
+                            <Link href="/admin/addprojects"
+                                className="bg-blue-700 text-white font-semibold hover:bg-gray-500 rounded-lg py-2 px-4 ml-4">
+                                + Add Project
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="project-table">
+                        <ProjectTable />
+                    </div>
                 </div>
             </div>
-            <div className="flex">
-                <Link href="/admin/projects" className=" bg-blue-700 text-white font-semibold py-2 px-2
-                hover:bg-gray-500 rounded-l-lg">All Projects</Link>
-                <Link href="/admin/trash" className=" bg-gray-300 text-gray-700 font-semibold py-2 px-2
-                hover:bg-gray-500 rounded-r-lg">Trash</Link>
-                <div className="search-bar ml-auto">
-                    <input type="text" placeholder="Search..." />
-                    <button className="hover:bg-gray-200">🔍</button>
-                </div>
-            </div>
-            <div className="project-table">
-                <ProjectTable />
-            </div>
         </div>
-        </div>
-    </div>
-)
+    );
 }
-
 export default projects;

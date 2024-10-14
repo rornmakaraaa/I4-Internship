@@ -5,8 +5,6 @@ import "../app/globals.css";
 import Link from 'next/link';
 import Image from 'next/image';
 import Footer from '@/components/auths/Footer';
-
-// Define types for projects and services
 interface Project {
     src: string;
     alt: string;
@@ -17,8 +15,9 @@ interface Project {
 interface Projects {
     website: Project[];
     uiUx: Project[];
-    mobile?: Project[];  // You can add this key if you have mobile projects
+    mobile?: Project[];
     softwareCustomization?: Project[];
+    analytics?: Project[];
 }
 
 const HomePage = () => {
@@ -61,7 +60,6 @@ const HomePage = () => {
         );
     };
 
-    // Define the project data with explicit types
     const projects: Projects = {
         website: [
             { src: "/snapchat.jpg", alt: "SnapChat Clone", title: "SnapChat Clone", link: "/projects/snapchat-clone" },
@@ -73,10 +71,8 @@ const HomePage = () => {
             { src: "/E-learning.jpg", alt: "E-Learning App", title: "E-Learning App", link: "/projects/e-learning-app" },
             { src: "/Production.jpg", alt: "Drumolotion Production", title: "Drumolotion Production", link: "/projects/drumolotion-production" },
         ],
-        // You can add more categories like 'mobile' or 'softwareCustomization' as needed
     };
 
-    // Toggle the selected service
     const handleButtonClick = (service: keyof Projects) => {
         // Toggle the service. If the same button is clicked, deselect it.
         if (selectedService === service) {
@@ -152,12 +148,12 @@ const HomePage = () => {
                         <div className="bg-white shadow-md rounded-md p-4 text-center">
                             <Image src="/web.jpg" alt="Mobile App" width={100} height={100} className="mx-auto" />
                             <h4 className="font-semibold">Web Develpment</h4>
-                            <p>Innovative mobile applications</p>
+                            <p>Develop and customize web apps</p>
                         </div>
                         <div className="bg-white shadow-md rounded-md p-4 text-center">
                             <Image src="/mobile.jpg" alt="Software Customize" width={100} height={100} className="mx-auto" />
-                            <h4 className="font-semibold">Progressive Web Apps</h4>
-                            <p>Tailored software solutions</p>
+                            <h4 className="font-semibold">Mobile Development</h4>
+                            <p>Innovative mobile applications</p>
                         </div>
                         <div className="bg-white shadow-md rounded-md p-4 text-center">
                             <Image src="/picture7.jpg" alt="Software Customize" width={100} height={100} className="mx-auto" />
@@ -166,8 +162,9 @@ const HomePage = () => {
                         </div>
                         <div className="bg-white shadow-md rounded-md p-4 text-center">
                             <Image src="/picture8.jpg" alt="Software Customize" width={100} height={100} className="mx-auto" />
-                            <h4 className="font-semibold">Software Customize</h4>
-                            <p>Tailored software solutions</p>
+                            <h4 className="font-semibold">Analytics</h4>
+                            <p>Computational analytics of</p>
+                            <p>data or statistics.</p>
                         </div>
                     </div>
                 </section>
@@ -199,7 +196,13 @@ const HomePage = () => {
                         className="border border-radius-40 hover:bg-gray-500 text-black font-bold py-2 px-4 rounded"
                         onClick={() => handleButtonClick('softwareCustomization')}
                     >
-                        Software Customize
+                        Software
+                    </button>
+                    <button
+                        className="border border-radius-40 hover:bg-gray-500 text-black font-bold py-2 px-4 rounded"
+                        onClick={() => handleButtonClick('analytics')}
+                    >
+                        Analytics
                     </button>
                 </div>
 

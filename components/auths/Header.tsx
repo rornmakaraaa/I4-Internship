@@ -1,15 +1,15 @@
 import React from 'react';
+import { FaBell} from "react-icons/fa";
 
 export default function Header() {
   return (
     <header className="header">
       <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
       <div className="user-info">
-        <div className="bell-icon">🔔</div>
+      <FaBell className="bell-icon text-gray-700" style={{ fontSize: '24px', marginRight: '15px' }} />
         <div className="user-avatar">
           <img src="/profile.jpg" alt="Mama" />
         </div>
-        <div className="user-name">Mama</div>
       </div>
 <style jsx>{`
   .header {
@@ -23,10 +23,6 @@ export default function Header() {
   .user-info {
   display: flex;
   align-items: center;
-  }
-  .bell-icon {
-  margin-right: 15px;
-  font-size: 24px;
   }
   .user-avatar img {
   border-radius: 50%;
