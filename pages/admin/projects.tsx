@@ -14,12 +14,12 @@ const projects = () => {
                 <Sidebar />
                 <div className="main flex-grow p-5">
                     <div className="top-bar flex">
-                        <h2 className="font-bold text-3xl">Projects</h2>
+                        <h2 className="font-bold text-2xl">Projects</h2>
                     </div>
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex">
                             <Link href="/admin/projects"
-                                className="bg-blue-700 text-white font-semibold py-2 px-4 hover:bg-gray-500 rounded-l-lg">
+                                className="bg-blue-900 text-white font-semibold py-2 px-4 hover:bg-gray-500 rounded-l-lg">
                                 All Projects
                             </Link>
                             <Link href="/admin/trash"
@@ -36,7 +36,7 @@ const projects = () => {
                                 <FaSearch className="text-gray-500 ml-2" style={{ fontSize: '20px' }} />
                             </button>
                             <Link href="/admin/addprojects"
-                                className="bg-blue-700 text-white font-semibold hover:bg-gray-500 rounded-lg py-2 px-4 ml-4">
+                                className="bg-blue-900 text-white font-semibold hover:bg-gray-500 rounded-lg py-2 px-4 ml-4">
                                 + Add Project
                             </Link>
                         </div>

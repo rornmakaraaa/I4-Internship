@@ -4,9 +4,9 @@ import { FaBell} from "react-icons/fa";
 export default function Header() {
   return (
     <header className="header">
-      <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
+      <h1 className="font-bold text-4xl text-white">CamAi</h1>
       <div className="user-info">
-      <FaBell className="bell-icon text-gray-700" style={{ fontSize: '24px', marginRight: '15px' }} />
+      <FaBell className="bell-icon text-white" style={{ fontSize: '24px', marginRight: '15px' }} />
         <div className="user-avatar">
           <img src="/profile.jpg" alt="Mama" />
         </div>
@@ -17,7 +17,7 @@ export default function Header() {
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #fff;
+  background-color: #1E3A8A;
   border-bottom: 1px solid #ddd;
   }
   .user-info {

@@ -17,7 +17,7 @@ const trash = () => {
                 <h2 className="font-bold text-3xl">Projects</h2>
             </div>
             <div className="back flex mt-4 items-center">
-                <button className="bg-blue-700 text-white flex font-semibold
+                <button className="bg-blue-900 text-white flex font-semibold
                 py-2 px-2 hover:bg-gray-500 rounded-lg items-center font-size-lg"
                 onClick={() => router.push('/admin/projects')}>
                     <FaBackward className="mr-1" />Back</button>

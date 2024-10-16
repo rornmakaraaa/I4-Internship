@@ -46,10 +46,7 @@ const CreateProject = () => {
             if (!response.ok) {
                 throw new Error('Failed to create project');
             }
-
-
             router.push('/admin/projects'); // Assuming you have a page to display projects
-
         } catch (error: any) {
             console.error('Error creating project:', error);
             setError(error.message || 'Something went wrong');

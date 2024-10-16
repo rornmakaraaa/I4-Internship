@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import '../styles/dasboard.css';
+import { FaSearch } from 'react-icons/fa';
 import Header from '@/components/auths/Header';
 import Sidebar from '@/components/Sidebar';
 
@@ -36,11 +37,14 @@ return (
                 <Sidebar />
                 <div className="main-content">
                     <div className="top-bar">
-                        <h2 className="font-bold text-3xl">Dashboard</h2>
-                        <div className="search-bar">
-                            <input type="text" placeholder="Search..." />
-                            <button className="hover:bg-gray-200">🔍</button>
-                        </div>
+                        <h2 className="font-bold text-2xl">Dashboard</h2>
+                        <button className="flex items-center bg-gray-200 rounded-lg py-2 px-2">
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                className="border-none outline-none bg-transparent w-24" />
+                                <FaSearch className="text-gray-500 ml-2" style={{ fontSize: '20px' }} />
+                        </button>
                     </div>
                     <div className="top-cards">
                         <div className="card total-customers">

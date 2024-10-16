@@ -68,13 +68,13 @@ const TeamManagement: React.FC = () => {
                                 <img
                                     src={team.image}
                                     alt={team.name}
-                                    className="h-24 w-24 object-cover mx-auto mb-4"
+                                    className="h-24 w-24 object-cover mx-auto "
                                 />
-                                <h3 className="text-lg font-bold">{team.name}</h3>
-                                <p>{(team.members?.length || 0)} Members</p>
+                                <h3 className="text-lg font-bold pt-2">{team.name}</h3>
+                                <p className='mt-1'>{(team.members?.length || 0)} Members</p>
                                 <Link href={`/admin/${team.id}`} className="text-blue-600 hover:underline mt-2">
                                     View Team Members
-                            </Link>
+                                </Link>
                             </div>
                         ))}
                     </div>
@@ -85,7 +85,7 @@ const TeamManagement: React.FC = () => {
                                 onClick={() => handlePageClick(index + 1)}
                                 className={`mx-2 px-4 py-2 rounded-full ${
                                     currentPage === index + 1
-                                        ? 'bg-blue-600 text-white'
+                                        ? 'bg-blue-900 text-white'
                                         : 'bg-gray-200 text-black'
                                 }`}
                             >

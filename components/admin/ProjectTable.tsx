@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { FaEdit, FaTrash, FaPlus, FaMinus } from "react-icons/fa";
-import axios from "axios"; // Ensure axios is installed
-import { useRouter } from "next/router"; // Use for routing to the edit page
+import axios from "axios";
+import { useRouter } from "next/router";
+
+type Team = {
+    id: number;
+    name: string;
+    members: string[];
+};
 
 type Project = {
     id: number;
     title: string;
     type: string;
     status: "Completed" | "In Progress";
-    team: string[] | null; // Handle potential null values
+    team: string[] | null;
     description: string;
 };
 
-const EditProject: React.FC = () => {
+const ProjectTable: React.FC = () => {
     const [projects, setProjects] = useState<Project[]>([]);
+    const [teams, setTeams] = useState<Team[]>([]); // State to store fetched teams
     const [expanded, setExpanded] = useState<number | null>(null);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null); // Track selected project for editing
     const [newTeamMember, setNewTeamMember] = useState(""); // State for adding new team member
@@ -34,6 +41,20 @@ const EditProject: React.FC = () => {
         fetchProjects();
     }, []);
 
+    // Fetch teams from API
+    useEffect(() => {
+        const fetchTeams = async () => {
+            try {
+                const response = await axios.get("http://localhost:8000/api/teams");
+                setTeams(response.data);
+            } catch (error) {
+                console.error("Error fetching teams:", error);
+            }
+        };
+
+        fetchTeams();
+    }, []);
+
     const toggleDescription = (index: number) => {
         setExpanded(expanded === index ? null : index);
     };
@@ -50,7 +71,6 @@ const EditProject: React.FC = () => {
         try {
             // Send a DELETE request to the API
             await axios.delete(`http://localhost:8000/api/projects/${id}`);
-
             // Filter the deleted project out of the state
             setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
         } catch (error) {
@@ -64,7 +84,6 @@ const EditProject: React.FC = () => {
         try {
             // Update the project using PUT or PATCH
             await axios.put(`http://localhost:8000/api/projects/${selectedProject.id}`, selectedProject);
-            
             // Update the projects in the state
             setProjects((prevProjects) =>
                 prevProjects.map((project) =>
@@ -79,11 +98,22 @@ const EditProject: React.FC = () => {
         }
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        if (selectedProject) {
+    const handleChange = async (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        const { name, value } = e.target;
+
+        if (name === "team") {
+            // Find the selected team and update the team members in selectedProject
+            const selectedTeam = teams.find((team) => team.id === parseInt(value));
+            if (selectedTeam && selectedProject) {
+                setSelectedProject({
+                    ...selectedProject,
+                    team: selectedTeam.members, // Assign the team members to the project
+                });
+            }
+        } else if (selectedProject) {
             setSelectedProject({
                 ...selectedProject,
-                [e.target.name]: e.target.value,
+                [name]: value,
             });
         }
     };
@@ -165,11 +195,11 @@ const EditProject: React.FC = () => {
                                 <div className="flex space-x-2">
                                     <FaEdit
                                         style={{ color: "blue", cursor: "pointer" }}
-                                        onClick={() => handleEdit(project)} // Pass the project to edit
+                                        onClick={() => handleEdit(project)}
                                     />
                                     <FaTrash
                                         style={{ color: "red", cursor: "pointer" }}
-                                        onClick={() => handleDelete(project.id)} // Delete project on click
+                                        onClick={() => handleDelete(project.id)}
                                     />
                                 </div>
                             </td>
@@ -177,7 +207,6 @@ const EditProject: React.FC = () => {
                     ))}
                 </tbody>
             </table>
-
             {/* Modal for editing project */}
             {showModal && selectedProject && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50">
@@ -213,61 +242,47 @@ const EditProject: React.FC = () => {
                             />
                         </div>
                         <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">Status</label>
+                            <label className="block text-gray-700 text-sm font-bold mb-2">Team</label>
                             <select
-                                name="status"
-                                value={selectedProject.status}
+                                name="team"
+                                value="" // Reset value for team select
                                 onChange={handleChange}
                                 className="border rounded w-full py-2 px-3"
                             >
-                                <option value="In Progress">In Progress</option>
-                                <option value="Completed">Completed</option>
+                                <option value="">Select Team</option>
+                                {teams.map((team) => (
+                                    <option key={team.id} value={team.id}>
+                                        {team.name}
+                                    </option>
+                                ))}
                             </select>
-                        </div>
-
-                        {/* Team Members Section */}
-                        <div className="mb-4">
-                            <label className="block text-gray-700 text-sm font-bold mb-2">Team Members</label>
-                            <div className="mb-2">
-                                {selectedProject.team && selectedProject.team.length > 0 ? (
-                                    selectedProject.team.map((member, idx) => (
-                                        <div key={idx} className="flex items-center justify-between mb-2">
+                            <div className="mt-2">
+                            <div className="mt-2">
+                            {Array.isArray(selectedProject.team) && selectedProject.team.length > 0 ? (
+                                <ul>
+                                    {selectedProject.team.map((member, index) => (
+                                        <li key={index} className="flex items-center space-x-2">
                                             <span>{member}</span>
                                             <FaMinus
                                                 style={{ color: "red", cursor: "pointer" }}
-                                                onClick={() => handleRemoveTeamMember(idx)}
+                                                onClick={() => handleRemoveTeamMember(index)}
                                             />
-                                        </div>
-                                    ))
-                                ) : (
-                                    <span>No Team Members</span>
-                                )}
-                            </div>
-
-                            <div className="flex items-center">
-                                <input
-                                    type="text"
-                                    value={newTeamMember}
-                                    onChange={(e) => setNewTeamMember(e.target.value)}
-                                    placeholder="Add team member"
-                                    className="border rounded w-full py-2 px-3"
-                                />
-                                <FaPlus
-                                    style={{ color: "green", cursor: "pointer", marginLeft: "10px" }}
-                                    onClick={handleAddTeamMember}
-                                />
-                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : null}
                         </div>
-
-                        <div className="flex justify-end space-x-2">
+                        </div>
+                        </div>
+                        <div className="flex justify-between">
                             <button
-                                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+                                className="bg-gray-300 text-gray-700 px-4 py-2 rounded"
                                 onClick={() => setShowModal(false)}
                             >
                                 Cancel
                             </button>
                             <button
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                className="bg-blue-900 text-white px-4 py-2 rounded mr-2"
                                 onClick={handleSave}
                             >
                                 Save
@@ -280,4 +295,4 @@ const EditProject: React.FC = () => {
     );
 };
 
-export default EditProject;
+export default ProjectTable;

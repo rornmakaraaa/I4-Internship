@@ -37,7 +37,6 @@ const CreateUser = () => {
                 aria-label="Back to Projects">
                 &times;
             </button>
-
             <form onSubmit={handleSubmit} className="space-y-4">
                 <h3 className="text-xl font-semibold">Create User</h3>
                 <div className="flex flex-col">
@@ -49,7 +48,6 @@ const CreateUser = () => {
                         required
                         className="p-2 border border-gray-300 rounded-md"/>
                 </div>
-
                 <div className="flex flex-col">
                     <label htmlFor="name" className="mb-1 font-medium">Name</label>
                     <input
@@ -60,7 +58,6 @@ const CreateUser = () => {
                         required
                         className="p-2 border border-gray-300 rounded-md"/>
                 </div>
-
                 <div className="flex flex-col">
                     <label htmlFor="email" className="mb-1 font-medium">Email</label>
                     <input
@@ -71,7 +68,6 @@ const CreateUser = () => {
                         required
                         className="p-2 border border-gray-300 rounded-md"/>
                 </div>
-
                 <div className="flex flex-col">
                     <label htmlFor="role" className="mb-1 font-medium">Role</label>
                     <select
@@ -86,7 +82,6 @@ const CreateUser = () => {
                         <option value="customer">Customer</option>
                     </select>
                 </div>
-
                 <div className="flex justify-between mt-4">
                     <button
                         type="button"
@@ -96,7 +91,7 @@ const CreateUser = () => {
                     </button>
                     <button
                         type="submit"
-                        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                        className="bg-blue-900 text-white px-4 py-2 rounded-md hover:bg-gray-500">
                         Create
                     </button>
                 </div>
