@@ -9,7 +9,6 @@ exports.createUser = async (req, res) => {
     if (!username || !password) {
         return res.status(400).json({ success: false, message: 'Username and password are required' });
     }
-
     try {
         // Hash the password before storing it in the database
         const hashedPassword = await bcrypt.hash(password, 10);
