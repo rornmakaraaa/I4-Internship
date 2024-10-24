@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 const findUserByUsername = async (username) => {
     const [rows] = await db.query('SELECT * FROM users WHERE username = ?', [username]);
-    return rows[0]; // Return the first user found
+    return rows[0];
 };
 
 const createUser = async (username, hashedPassword) => {
