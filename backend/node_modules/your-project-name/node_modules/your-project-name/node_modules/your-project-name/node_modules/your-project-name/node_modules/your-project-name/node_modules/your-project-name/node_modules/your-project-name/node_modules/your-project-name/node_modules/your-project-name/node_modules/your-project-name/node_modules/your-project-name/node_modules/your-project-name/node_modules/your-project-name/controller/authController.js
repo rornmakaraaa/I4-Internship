@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const db = require('../config/db'); // Ensure the correct path to the db
+const db = require('../config/db');
 
 // Create user in the database
 exports.createUser = async (req, res) => {

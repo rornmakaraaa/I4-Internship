@@ -1,5 +1,5 @@
-const mysql = require('mysql2/promise'); // Import the promise version of mysql2
-require('dotenv').config(); // Load environment variables
+const mysql = require('mysql2/promise');
+require('dotenv').config();
 
 const db = mysql.createPool({
     host: process.env.DB_HOST || 'localhost',
