@@ -4,14 +4,21 @@ const userController = require('../controller/userController');
 
 const router = express.Router();
 
-// Set up multer for handling file uploads
-const upload = multer({ dest: 'uploads/' });
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
 
-// Define routes
-router.get('/', userController.getAllUsers);
-router.get('/:id', userController.getUserById);
-router.post('/', upload.single('image'), userController.createUser); // Handle file upload
-router.put('/:id', upload.single('image'), userController.updateUser); // Handle file upload
-router.delete('/:id', userController.deleteUser);
+const upload = multer({ storage: storage });
+
+// Define routes for user management
+router.get('/usermanage', userController.getUsers); // Get all users
+router.post('/usermanage', upload.single('image'), userController.createUser); // Create a new user
+router.put('/usermanage/:id', upload.single('image'), userController.updateUser); // Update a user
+router.delete('/usermanage/:id', userController.deleteUser); // Delete a user
 
 module.exports = router;

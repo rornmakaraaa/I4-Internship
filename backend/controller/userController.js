@@ -1,79 +1,70 @@
-const db = require('../config/db');
+const db = require('../config/db'); // Assuming you have a db connection setup in db.js
 
 // Get all users
-exports.getAllUsers = async (req, res) => {
+exports.getUsers = async (req, res) => {
     try {
-        const [users] = await db.query('SELECT * FROM users_gp');
-        res.json(users);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
-
-// Get a user by ID
-exports.getUserById = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const [user] = await db.query('SELECT * FROM users_gp WHERE id = ?', [id]);
-        if (user.length === 0) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        res.json(user[0]);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        const [results] = await db.query('SELECT * FROM usermanage');
+        // Construct image URLs
+        const usersWithImageUrls = results.map(user => ({
+            ...user,
+            image: `${req.protocol}://${req.get('host')}/uploads/${user.image}`
+        }));
+        res.json(usersWithImageUrls);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
     }
 };
 
 // Create a new user
 exports.createUser = async (req, res) => {
-    const { name, email, role } = req.body;
-    const profile_image = req.file ? req.file.path : null; // Handle the image file
-    const dateAdded = new Date().toISOString(); // Automatically set dateAdded to current date
+    const { name, email, role, birthdate } = req.body;
+    const image = req.file ? req.file.filename : null;
 
     try {
         const [result] = await db.query(
-            'INSERT INTO users_gp (profile_image, name, email, role, dateAdded) VALUES (?, ?, ?, ?, ?)',
-            [profile_image, name, email, role, dateAdded]
+            'INSERT INTO usermanage (name, email, role, birthdate, image) VALUES (?, ?, ?, ?, ?)',
+            [name, email, role, birthdate, image]
         );
-        res.status(201).json({ id: result.insertId, profile_image, name, email, role, dateAdded });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.json({ message: 'User created successfully', userId: result.insertId });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
     }
 };
 
-// Update a user by ID
+// Update a user
 exports.updateUser = async (req, res) => {
-    const { id } = req.params;
-    const { name, email, role } = req.body;
-    const profile_image = req.file ? req.file.path : null; // Handle the image file
-    const dateAdded = new Date().toISOString(); // Automatically set dateAdded to current date
+    const { name, email, role, birthdate } = req.body;
+    const image = req.file ? req.file.filename : null;
+
+    let query = 'UPDATE usermanage SET name = ?, email = ?, role = ?, birthdate = ?';
+    const values = [name, email, role, birthdate];
+
+    if (image) {
+        query += ', image = ?';
+        values.push(image);
+    }
+
+    query += ' WHERE id = ?';
+    values.push(req.params.id);
 
     try {
-        const [result] = await db.query(
-            'UPDATE users_gp SET profile_image = ?, name = ?, email = ?, role = ?, dateAdded = ? WHERE id = ?',
-            [profile_image, name, email, role, dateAdded, id]
-        );
-
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-
-        res.json({ id, profile_image, name, email, role, dateAdded });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        await db.query(query, values);
+        res.json({ message: 'User updated successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
     }
 };
 
-// Delete a user by ID
+// Delete a user
 exports.deleteUser = async (req, res) => {
-    const { id } = req.params;
     try {
-        const [result] = await db.query('DELETE FROM users_gp WHERE id = ?', [id]);
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'User not found' });
-        }
-        res.status(204).send(); // No content
-    } catch (error) {
-        res.status(500).json({ error: error.message });
+        await db.query('DELETE FROM usermanage WHERE id = ?', [req.params.id]);
+        res.json({ message: 'User deleted successfully' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Database error' });
     }
 };
