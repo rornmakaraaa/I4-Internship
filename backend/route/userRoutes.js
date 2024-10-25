@@ -15,7 +15,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// Define routes for user management
 router.get('/usermanage', userController.getUsers); // Get all users
 router.post('/usermanage', upload.single('image'), userController.createUser); // Create a new user
 router.put('/usermanage/:id', upload.single('image'), userController.updateUser); // Update a user
