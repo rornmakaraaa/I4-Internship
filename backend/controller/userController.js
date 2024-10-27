@@ -1,10 +1,9 @@
-const db = require('../config/db'); // Assuming you have a db connection setup in db.js
+const db = require('../config/db');
 
 // Get all users
 exports.getUsers = async (req, res) => {
     try {
         const [results] = await db.query('SELECT * FROM usermanage');
-        // Construct image URLs
         const usersWithImageUrls = results.map(user => ({
             ...user,
             image: `${req.protocol}://${req.get('host')}/uploads/${user.image}`
@@ -18,15 +17,23 @@ exports.getUsers = async (req, res) => {
 
 // Create a new user
 exports.createUser = async (req, res) => {
-    const { name, email, role, birthdate } = req.body;
+    const { name, email, role, addeddate } = req.body;
     const image = req.file ? req.file.filename : null;
 
     try {
         const [result] = await db.query(
-            'INSERT INTO usermanage (name, email, role, birthdate, image) VALUES (?, ?, ?, ?, ?)',
-            [name, email, role, birthdate, image]
+            'INSERT INTO usermanage (name, email, role, addeddate, image) VALUES (?, ?, ?, ?, ?)',
+            [name, email, role, addeddate, image]
         );
-        res.json({ message: 'User created successfully', userId: result.insertId });
+        const newUser = {
+            id: result.insertId,
+            name,
+            email,
+            role,
+            addeddate,
+            image
+        };
+        res.json(newUser);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Database error' });
@@ -35,11 +42,11 @@ exports.createUser = async (req, res) => {
 
 // Update a user
 exports.updateUser = async (req, res) => {
-    const { name, email, role, birthdate } = req.body;
+    const { name, email, role, addeddate } = req.body;
     const image = req.file ? req.file.filename : null;
 
-    let query = 'UPDATE usermanage SET name = ?, email = ?, role = ?, birthdate = ?';
-    const values = [name, email, role, birthdate];
+    let query = 'UPDATE usermanage SET name = ?, email = ?, role = ?, addeddate = ?';
+    const values = [name, email, role, addeddate];
 
     if (image) {
         query += ', image = ?';
@@ -51,7 +58,8 @@ exports.updateUser = async (req, res) => {
 
     try {
         await db.query(query, values);
-        res.json({ message: 'User updated successfully' });
+        const updatedUser = { id: req.params.id, name, email, role, addeddate, image };
+        res.json(updatedUser);
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: 'Database error' });
