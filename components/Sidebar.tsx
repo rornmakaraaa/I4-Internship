@@ -62,20 +62,20 @@ export default function Sidebar() {
                         </Link>
                     </li>
                     <li className="mb-2">
-                        <Link href="/admin/feedback" legacyBehavior>
-                            <a className={`flex items-center text-lg p-3 rounded-lg
-                                ${activeLink === '/admin/feedback' ? 'bg-blue-900 text-white' : 'text-black'}`}>
-                                <FaCommentDots className="mr-2" />
-                                Feedback
-                            </a>
-                        </Link>
-                    </li>
-                    <li className="mb-16">
                         <Link href="/admin/report" legacyBehavior>
                             <a className={`flex items-center text-lg p-3 rounded-lg
                                 ${activeLink === '/admin/report' ? 'bg-blue-900 text-white' : 'text-black'}`}>
                                 <FaChartPie className="mr-2" />
                                 Reporting
+                            </a>
+                        </Link>
+                    </li>
+                    <li className="mb-16">
+                        <Link href="/admin/feedback" legacyBehavior>
+                            <a className={`flex items-center text-lg p-3 rounded-lg
+                                ${activeLink === '/admin/feedback' ? 'bg-blue-900 text-white' : 'text-black'}`}>
+                                <FaCommentDots className="mr-2" />
+                                Feedback
                             </a>
                         </Link>
                     </li>

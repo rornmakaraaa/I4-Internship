@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/dasboard.css';
 import Header from '@/components/auths/Header';
 import Sidebar from '@/components/Sidebar';
 import ProjectTable from '@/components/admin/ProjectTable';
 import Link from 'next/link';
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from 'react-icons/fa';
 
-const projects = () => {
+const ProjectsPage: React.FC = () => {
+    const [searchQuery, setSearchQuery] = useState('');
+
     return (
         <div className="project flex flex-col w-auto">
             <Header />
@@ -18,12 +20,10 @@ const projects = () => {
                     </div>
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex">
-                            <Link href="/admin/projects"
-                                className="bg-blue-900 text-white font-semibold py-2 px-4 hover:bg-gray-500 rounded-l-lg">
+                            <Link href="/admin/projects" className="bg-blue-900 text-white font-semibold py-2 px-4 hover:bg-gray-500 rounded-l-lg">
                                 All Projects
                             </Link>
-                            <Link href="/admin/trash"
-                                className="bg-gray-200 text-gray-700 font-semibold py-2 px-4 hover:bg-gray-500 rounded-r-lg">
+                            <Link href="/admin/trash" className="bg-gray-200 text-gray-700 font-semibold py-2 px-4 hover:bg-gray-500 rounded-r-lg">
                                 Trash
                             </Link>
                         </div>
@@ -32,21 +32,24 @@ const projects = () => {
                                 <input
                                     type="text"
                                     placeholder="Search..."
-                                    className="border-none outline-none bg-transparent w-24" />
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="border-none outline-none bg-transparent w-24"
+                                />
                                 <FaSearch className="text-gray-500 ml-2" style={{ fontSize: '20px' }} />
                             </button>
-                            <Link href="/admin/addprojects"
-                                className="bg-blue-900 text-white font-semibold hover:bg-gray-500 rounded-lg py-2 px-4 ml-4">
+                            <Link href="/admin/addprojects" className="bg-blue-900 text-white font-semibold hover:bg-gray-500 rounded-lg py-2 px-4 ml-4">
                                 + Add Project
                             </Link>
                         </div>
                     </div>
                     <div className="project-table">
-                        <ProjectTable />
+                        <ProjectTable searchQuery={searchQuery} /> {/* Pass searchQuery prop */}
                     </div>
                 </div>
             </div>
         </div>
     );
-}
-export default projects;
+};
+
+export default ProjectsPage;

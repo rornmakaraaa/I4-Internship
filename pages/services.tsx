@@ -7,21 +7,21 @@ import Footer from '../components/auths/Footer';
 const Services = () => {
 return (
     <div className="services">
-        <header className="flex justify-between items-center  py-4 ">
-        <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
-        <nav className="flex text-center space-x-4">
-            <Link href="/home" className="font-bold">Home</Link>
-            <Link href="/services" className="underline decoration-none group
+        <header className="flex justify-center items-center py-4">
+            <nav className="flex text-center space-x-4">
+                <Link href="/home" className="font-bold">Home</Link>
+                <Link href="/services" className="underline decoration-none group
                     hover:decoration-blue-200 font-bold text-blue-500">Services</Link>
-            <Link href="/about" className="hover:bg-pink-100 font-bold">About</Link>
-            <Link href="/contact" className="hover:bg-pink-100 font-bold">Contact</Link>
-            <Link href="/pricing" className="hover:bg-pink-100 font-bold">Pricing</Link>
-        </nav>
-        <div>
-            <Link href="/signin" className="sign-in-link border font-bold border-gray-300 px-4 py-2 hover:bg-pink-100">
-            Sign In
+                <Link href="/about" passHref className="font-bold">About</Link>
+                <Link href="/contact" className="font-bold">Contact</Link>
+                <Link href="/pricing" className="font-bold">Pricing</Link>
+            </nav>
+            <div className="ml-8">
+            <Link href="/login" className="underline decoration-none group
+                            hover:decoration-blue-200 font-bold text-blue-500">
+                Login
             </Link>
-        </div>
+            </div>
         </header>
     <main className="mt-8">
         <div className="mb-8 flex flex-col items-center justify-center">
@@ -42,8 +42,8 @@ return (
                     <h3 className="text-2xl font-bold text-blue-400 mt-2">Website and Web App Development</h3>
                     <p className="mt-4">A Website is something that gives you and Your Business a web presence. </p>
                     <p>Here at CamAi, We exactly take care of that.</p>
-                    <button className="bg-blue-700 text-white justify-center mt-5
-                    hover:bg-gray-400 px-4 py-2 rounded">More</button>
+                    {/* <button className="bg-blue-700 text-white justify-center mt-5
+                    hover:bg-gray-400 px-4 py-2 rounded">More</button> */}
                 </div>
                 <Image src="/picture9.jpg" alt="Web Development" width={400} height={400} className='ml-44'/>
             </div>
@@ -56,7 +56,8 @@ return (
                     <p className="mt-4">Progressive web apps are the future of
                         modern web</p>
                     <p>and we understand that as We've been working with those</p>
-                    <button className="bg-blue-700 text-white justify-center mt-5 hover:bg-gray-400 px-4 py-2 rounded">More</button>
+                    {/* <button className="bg-blue-700 text-white justify-center mt-5
+                    hover:bg-gray-400 px-4 py-2 rounded">More</button> */}
                 </div>
             </div>
 
@@ -66,8 +67,8 @@ return (
                     <h3 className="text-2xl font-bold text-blue-400 mt-2">User interface and User experience design</h3>
                     <p className="mt-4">As a Design focused digital agency we are highly</p>
                     <p>concerned about the overall product design.</p>
-                    <button className="bg-blue-700 text-white justify-center mt-5
-                    hover:bg-gray-400 px-4 py-2 rounded">More</button>
+                    {/* <button className="bg-blue-700 text-white justify-center mt-5
+                    hover:bg-gray-400 px-4 py-2 rounded">More</button> */}
                 </div>
                 <Image src="/picture11.jpg" alt="Web Development" width={400} height={400} className='ml-44'/>
             </div>

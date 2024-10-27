@@ -7,32 +7,32 @@ import Footer from '@/components/auths/Footer';
 const about = () => {
     return (
     <div className="about">
-        <header className="flex justify-between items-center py-4 ">
-            <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
-                <nav className="flex text-center space-x-4">
-                    <Link href="/home" className="font-bold">Home</Link>
-                    <Link href="/services" className="font-bold">Services</Link>
-                    <Link href="/about" passHref className="underline decoration-none group
-                        hover:decoration-blue-200 font-bold text-blue-500">About</Link>
-                    <Link href="/contact" className="font-bold">Contact</Link>
-                    <Link href="/pricing" className="font-bold">Pricing</Link>
-                </nav>
-                <div>
-                    <Link href="/signin" className="sign-in-link border font-bold border-gray-300 px-4 py-2 hover:bg-pink-100">
-                    Sign In
-                    </Link>
-                </div>
+        <header className="flex justify-center items-center py-4">
+            <nav className="flex text-center space-x-4">
+                <Link href="/home" className="font-bold">Home</Link>
+                <Link href="/services" className="font-bold">Services</Link>
+                <Link href="/about" passHref className="underline decoration-none group
+                    hover:decoration-blue-200 font-bold text-blue-500">About</Link>
+                <Link href="/contact" className="font-bold">Contact</Link>
+                <Link href="/pricing" className="font-bold">Pricing</Link>
+            </nav>
+            <div className="ml-8">
+                <Link href="/login" className="underline decoration-none group
+                            hover:decoration-blue-200 font-bold text-blue-500">
+                    Login
+                </Link>
+            </div>
         </header>
         <main className="mt-8">
             <div className="mb-8 text-center">
                 <h2 className="text-3xl font-bold mb-2">We are helping people with</h2>
                 <h2 className="text-3xl font-bold mb-2 text-blue-400">building their brands</h2>
                 <p className="mt-4">Global digital agency offering advertising and digital solutions for clients.</p>
-                <Image src="/picture12.jpg" alt="Our Story" width={300} height={300} className="mx-auto" />
+                <Image src="/work4.jpg" alt="Our Story" width={450} height={200} className="mx-auto" />
             </div>
-            <div className="flex justify-center">
+            {/* <div className="flex justify-center">
                 <button className="bg-blue-500 text-white w-28 h-10 rounded-2xl hover:bg-pink-100">Our Story</button>
-            </div>
+            </div> */}
             <section className="mb-12">
                 <div className="flex">
                     <div className='px-10 mt-16'>

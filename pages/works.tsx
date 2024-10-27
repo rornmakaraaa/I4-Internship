@@ -7,8 +7,7 @@ import Footer from '@/components/auths/Footer';
 const works = () => {
     return (
         <div className="home">
-            <header className="flex justify-between items-center py-4 ">
-                <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
+            <header className="flex justify-center items-center py-4 ">
                 <nav className="flex text-center space-x-4">
                     <Link href="/home" className="font-bold">Home</Link>
                     <Link href="/services" className="underline decoration-none group
@@ -17,11 +16,12 @@ const works = () => {
                     <Link href="/contact" className="font-bold">Contact</Link>
                     <Link href="/pricing" className="font-bold ">Pricing</Link>
                 </nav>
-                <div>
-                    <Link href="/signin" className="sign-in-link border font-bold border-gray-300 px-4 py-2 hover:bg-pink-100">
-                    Sign In
-                    </Link>
-                </div>
+                <div className="ml-8">
+            <Link href="/login" className="underline decoration-none group
+                hover:decoration-blue-200 font-bold text-blue-500">
+                Login
+            </Link>
+            </div>
             </header>
             <main className="mt-8">
                 <div className="text-center">

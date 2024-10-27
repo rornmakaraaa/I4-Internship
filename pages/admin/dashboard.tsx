@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/dasboard.css';
 import { FaSearch } from 'react-icons/fa';
 import Header from '@/components/auths/Header';
@@ -19,19 +19,41 @@ const recentProjectsData = [
     { title: 'Healthcare Platform', team: 'DevOps Team', status: 'In Progress' },
 ];
 
-const dashboard = () => {
+const Dashboard = () => {
     const [showMoreProjects, setShowMoreProjects] = useState(false);
+    const [totalProjects, setTotalProjects] = useState(0);
+    const [loading, setLoading] = useState(true);
 
     const handleSeeAllClick = () => {
-    setShowMoreProjects(!showMoreProjects);
+        setShowMoreProjects(!showMoreProjects);
     };
 
     const projectsToShow = showMoreProjects
         ? recentProjectsData
         : recentProjectsData.slice(0, 4);
 
-return (
-    <div className="dashboard">
+    // Fetch total projects from API
+    useEffect(() => {
+        const fetchTotalProjects = async () => {
+            try {
+                const response = await fetch('http://localhost:8000/api/dashboard/projects/count');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setTotalProjects(data.total_projects);
+            } catch (error) {
+                console.error('Failed to fetch total projects:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchTotalProjects();
+    }, []);
+
+    return (
+        <div className="dashboard">
             <Header />
             <div className="dashboard-container">
                 <Sidebar />
@@ -43,7 +65,7 @@ return (
                                 type="text"
                                 placeholder="Search..."
                                 className="border-none outline-none bg-transparent w-24" />
-                                <FaSearch className="text-gray-500 ml-2" style={{ fontSize: '20px' }} />
+                            <FaSearch className="text-gray-500 ml-2" style={{ fontSize: '20px' }} />
                         </button>
                     </div>
                     <div className="top-cards">
@@ -55,15 +77,15 @@ return (
                         </div>
                         <div className="card total-projects">
                             <h3 className="font-bold text-2xl">Total Projects</h3>
-                            <p className="font-semibold mt-4 text-2xl">20</p>
+                            <p className="font-semibold mt-4 text-2xl">{loading ? 'Loading...' : totalProjects}</p>
                             <p className="font-semibold mt-2 text-xl">Projects</p>
-                            <img src={projectIcon} alt="Customer Icon" className="card-icon" />
+                            <img src={projectIcon} alt="Project Icon" className="card-icon" />
                         </div>
                         <div className="card total-visitors">
                             <h3 className="font-bold text-2xl">Total Visitors</h3>
                             <p className="font-semibold mt-4 text-2xl">20</p>
-                            <p className="font-semibold nt-2 text-xl">Visitors</p>
-                            <img src={visitorsIcon} alt="Customer Icon" className="card-icon" />
+                            <p className="font-semibold mt-2 text-xl">Visitors</p>
+                            <img src={visitorsIcon} alt="Visitors Icon" className="card-icon" />
                         </div>
                     </div>
                     <div className="recent-projects ">
@@ -82,22 +104,20 @@ return (
                                 </tr>
                             </thead>
                             <tbody>
-                            {recentProjectsData.slice(0, showMoreProjects ? recentProjectsData.length : 3).map((project, index) => (
-                                <tr key={index}>
-                                    <td>{project.title}</td>
-                                    <td>{project.team}</td>
-                                    <td>{project.status} <span className="status-dot"></span></td>
-                                </tr>
-                            ))}
-                            </tbody>
-                            <tbody>
+                                {projectsToShow.map((project, index) => (
+                                    <tr key={index}>
+                                        <td>{project.title}</td>
+                                        <td>{project.team}</td>
+                                        <td>{project.status} <span className="status-dot"></span></td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-);
+    );
 };
 
-export default dashboard;
+export default Dashboard;

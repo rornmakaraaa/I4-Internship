@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState, ReactNode } from 'react';
-import "../app/globals.css";
+import React, { useState, useEffect, ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Footer from '@/components/auths/Footer';
+import "../app/globals.css";
+
 interface Project {
     src: string;
     alt: string;
@@ -24,6 +25,19 @@ const HomePage = () => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [modalContent, setModalContent] = useState<string>('');
     const [selectedService, setSelectedService] = useState<string | null>(null);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const bannerImages = ["/banner1.jpg", "/banner2.jpg", "/banner3.jpg"];
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentImageIndex((prevIndex) =>
+                prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1
+            );
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     const openModal = (content: string) => {
         setModalContent(content);
@@ -67,18 +81,17 @@ const HomePage = () => {
             { src: "/Production.jpg", alt: "Drumolotion Production", title: "Drumolotion Production", link: "/projects/drumolotion-production" },
         ],
         uiUx: [
-            { src: "/snapchat.jpg", alt: "SnapChat Clone", title: "SnapChat Clone", link: "/projects/snapchat-clone" },
-            { src: "/E-learning.jpg", alt: "E-Learning App", title: "E-Learning App", link: "/projects/e-learning-app" },
+            { src: "/E-learning.jpg", alt: "Mobile", title: "Mobile", link: "/projects/mobile" },
+            { src: "/snapchat.jpg", alt: "E-Learning App", title: "E-Learning App", link: "/projects/elearning" },
             { src: "/Production.jpg", alt: "Drumolotion Production", title: "Drumolotion Production", link: "/projects/drumolotion-production" },
         ],
     };
 
     const handleButtonClick = (service: keyof Projects) => {
-        // Toggle the service. If the same button is clicked, deselect it.
         if (selectedService === service) {
-            setSelectedService(null);  // Deselect the current service
+            setSelectedService(null);
         } else {
-            setSelectedService(service);  // Set the new service
+            setSelectedService(service);
         }
     };
 
@@ -104,37 +117,32 @@ const HomePage = () => {
 
     return (
         <div className="home">
-            <header className="flex justify-between items-center py-4 ">
-                <h1 className="font-bold text-black-500 text-4xl">CamAi</h1>
-                <nav className="flex text-center space-x-4">
-                    <Link href="/home" className="underline decoration-none group hover:decoration-blue-200 font-bold text-blue-500">Home</Link>
+            <header className="flex justify-center items-center py-4">
+                <nav className="flex text-center space-x-6">
+                    <Link href="/home" className="underline decoration-none group
+                        hover:decoration-blue-200 font-bold text-blue-500">Home</Link>
                     <Link href="/services" className="font-bold">Services</Link>
-                    <Link href="/about" className="font-bold">About</Link>
+                    <Link href="/about" passHref className="font-bold">About</Link>
                     <Link href="/contact" className="font-bold">Contact</Link>
-                    <Link href="/pricing" className="font-bold ">Pricing</Link>
+                    <Link href="/pricing" className="font-bold">Pricing</Link>
                 </nav>
-                <div>
-                    <Link href="/login" className="sign-in-link border font-bold border-gray-100 px-4 py-2 hover:bg-gray-500">
-                        Sign In
+                <div className="ml-8">
+                    <Link href="/login" className="underline decoration-none group
+                            hover:decoration-blue-200 font-bold text-blue-500">
+                        Login
                     </Link>
                 </div>
             </header>
-            <main className="mt-8">
-                <div className="text-center">
-                    <h2 className="text-3xl font-bold mb-2">We Help People To</h2>
-                    <h2 className="text-3xl font-bold mb-2 text-purple-500">Shine Online</h2>
-                    <p className="mb-6">We are here to help your business to grow and shine online.</p>
-                    <Link href="/login" passHref>
-                        <button className="bg-blue-700 justify-center text-white hover:bg-gray-500 px-4 py-2 rounded">
-                            Get Started
-                        </button>
-                    </Link>
+            <main className="mt-2">
+                <div className="flex justify-center mb-4">
+                    <Image
+                        src={bannerImages[currentImageIndex]}
+                        alt="Illustration"
+                        width={1280}
+                        height={720}
+                        className="transition-opacity duration-500 ease-in-out object-cover"
+                    />
                 </div>
-
-                <div className="flex justify-center mb-8 py-5">
-                    <Image src="/banner.jpg" alt="Illustration" width={400} height={400} className="rounded" />
-                </div>
-
                 <section className="mb-12 px-10">
                     <h3 className="text-2xl font-bold">Services that we help </h3>
                     <h3 className="text-2xl font-bold mb-4 text-purple-500">Your Business</h3>
@@ -147,7 +155,7 @@ const HomePage = () => {
                         </div>
                         <div className="bg-white shadow-md rounded-md p-4 text-center">
                             <Image src="/web.jpg" alt="Mobile App" width={100} height={100} className="mx-auto" />
-                            <h4 className="font-semibold">Web Develpment</h4>
+                            <h4 className="font-semibold">Web Development</h4>
                             <p>Develop and customize web apps</p>
                         </div>
                         <div className="bg-white shadow-md rounded-md p-4 text-center">
@@ -186,39 +194,15 @@ const HomePage = () => {
                     >
                         UI/UX
                     </button>
-                    <button
-                        className="border border-radius-40 hover:bg-gray-500 text-black font-bold py-2 px-4 rounded"
-                        onClick={() => handleButtonClick('mobile')}
-                    >
-                        Mobile
-                    </button>
-                    <button
-                        className="border border-radius-40 hover:bg-gray-500 text-black font-bold py-2 px-4 rounded"
-                        onClick={() => handleButtonClick('softwareCustomization')}
-                    >
-                        Software
-                    </button>
-                    <button
-                        className="border border-radius-40 hover:bg-gray-500 text-black font-bold py-2 px-4 rounded"
-                        onClick={() => handleButtonClick('analytics')}
-                    >
-                        Analytics
-                    </button>
                 </div>
-
                 {renderProjects()}
-
-                <div className="flex justify-center">
-                    <Link href="/services" passHref>
-                        <button className="bg-blue-700 mt-8 text-white hover:bg-gray-500 px-4 py-2 rounded">
-                            More
-                        </button>
-                    </Link>
-                </div>
             </main>
             <Footer />
+            <Modal show={showModal} onClose={closeModal} title="Service Details">
+                <p>{modalContent}</p>
+            </Modal>
         </div>
     );
-};
+}
 
 export default HomePage;
