@@ -10,7 +10,7 @@ interface TeamMember {
     name: string;
     role: string;
     status: 'Active' | 'Inactive';
-    gender: 'Male' | 'Female' | 'Other'; // Include gender field
+    gender: 'Male' | 'Female' | 'Other';
 }
 
 const TeamMemberPage: React.FC = () => {
@@ -185,16 +185,16 @@ const TeamMemberPage: React.FC = () => {
                                         <option value="Female">Female</option>
                                         <option value="Other">Other</option>
                                     </select>
-                                    <div className="flex space-x-2">
-                                        <button type="submit" className="bg-blue-900 text-white p-2 rounded">
-                                            {editMember ? 'Update Member' : 'Add Member'}
-                                        </button>
+                                    <div className="flex justify-between">
                                         <button
                                             type="button"
                                             onClick={() => setShowForm(false)}
-                                            className="bg-gray-600 text-white p-2 rounded"
+                                            className="mr-2 bg-gray-300 text-black py-2 px-4 rounded"
                                         >
                                             Cancel
+                                        </button>
+                                        <button type="submit" className="bg-blue-900 text-white p-2 rounded">
+                                            {editMember ? 'Update Member' : 'Add Member'}
                                         </button>
                                     </div>
                                 </form>

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import "../app/globals.css";
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { FaHome, FaProjectDiagram, FaUserCircle, FaCommentDots, FaChartPie, FaUsersCog, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaProjectDiagram, FaUsersCog, FaCommentDots, FaSignOutAlt } from 'react-icons/fa';
 
 export default function Sidebar() {
     const router = useRouter();
@@ -13,7 +13,7 @@ export default function Sidebar() {
     }, [router.pathname]);
 
     return (
-        <div className="w-72 h-auto p-5 shadow-lg bg-white">
+        <div className="w-72 h-full min-h-screen p-5 shadow-lg bg-white">
             <nav>
                 <ul className="list-none p-0">
                     <li className="mb-2">
@@ -49,24 +49,6 @@ export default function Sidebar() {
                                 ${activeLink === '/admin/team' ? 'bg-blue-900 text-white' : 'text-black'}`}>
                                 <FaUsersCog className="mr-2" />
                                 Team
-                            </a>
-                        </Link>
-                    </li>
-                    <li className="mb-2">
-                        <Link href="/admin/chatgp" legacyBehavior>
-                            <a className={`flex items-center text-lg p-3 rounded-lg
-                                ${activeLink === '/admin/chatgp' ? 'bg-blue-900 text-white' : 'text-black'}`}>
-                                <FaUserCircle className="mr-2" />
-                                Chat
-                            </a>
-                        </Link>
-                    </li>
-                    <li className="mb-2">
-                        <Link href="/admin/report" legacyBehavior>
-                            <a className={`flex items-center text-lg p-3 rounded-lg
-                                ${activeLink === '/admin/report' ? 'bg-blue-900 text-white' : 'text-black'}`}>
-                                <FaChartPie className="mr-2" />
-                                Reporting
                             </a>
                         </Link>
                     </li>

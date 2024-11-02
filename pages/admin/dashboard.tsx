@@ -71,7 +71,7 @@ const Dashboard = () => {
                     <div className="top-cards">
                         <div className="card total-customers">
                             <h3 className="font-bold text-2xl">Total Customers</h3>
-                            <p className="font-semibold mt-4 text-2xl">20</p>
+                            <p className="font-semibold mt-4 text-2xl">8</p>
                             <p className="font-semibold mt-2 text-xl">Customers</p>
                             <img src={customerIcon} alt="Customer Icon" className="card-icon" />
                         </div>
@@ -83,7 +83,7 @@ const Dashboard = () => {
                         </div>
                         <div className="card total-visitors">
                             <h3 className="font-bold text-2xl">Total Visitors</h3>
-                            <p className="font-semibold mt-4 text-2xl">20</p>
+                            <p className="font-semibold mt-4 text-2xl">3</p>
                             <p className="font-semibold mt-2 text-xl">Visitors</p>
                             <img src={visitorsIcon} alt="Visitors Icon" className="card-icon" />
                         </div>

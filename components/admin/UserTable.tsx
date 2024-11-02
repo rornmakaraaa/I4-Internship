@@ -10,7 +10,11 @@ type User = {
     image: string;
 };
 
-const UserTable: React.FC = () => {
+interface UserTableProps {
+    searchTerm: string;
+}
+
+const UserTable: React.FC<UserTableProps> = ({ searchTerm }) => {
     const [users, setUsers] = useState<User[]>([]);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
     const [showModal, setShowModal] = useState(false);
@@ -39,7 +43,6 @@ const UserTable: React.FC = () => {
                 setError('Failed to load users');
             }
         };
-
         fetchUsers();
     }, []);
 
@@ -79,16 +82,12 @@ const UserTable: React.FC = () => {
         formData.append('name', selectedUser!.name);
         formData.append('email', selectedUser!.email);
         formData.append('role', selectedUser!.role);
-
-        // Include addeddate only if it has a value
         if (selectedUser!.addeddate) {
             formData.append('addeddate', selectedUser!.addeddate);
         }
-
         if (profileImage) {
             formData.append('image', profileImage);
         }
-
         try {
             if (isCreating) {
                 const response = await fetch('http://localhost:8000/api/usermanage', {
@@ -155,6 +154,11 @@ const UserTable: React.FC = () => {
     if (error) {
         return <div>{error}</div>;
     }
+    // Filter users based on searchTerm
+    const filteredUsers = users.filter(user =>
+        user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div className="container mx-auto mt-4">
@@ -170,7 +174,7 @@ const UserTable: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user) => (
+                    {filteredUsers.map(user => (
                         <tr key={user.id} className="border-b">
                             <td className="py-2 px-4">
                                 <img src={user.image} alt="Profile" className="w-8 h-8 rounded-full" />
@@ -193,6 +197,7 @@ const UserTable: React.FC = () => {
                     ))}
                 </tbody>
             </table>
+
             {showModal && selectedUser && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow-lg w-1/2">
@@ -227,25 +232,13 @@ const UserTable: React.FC = () => {
                                     value={selectedUser.role}
                                     onChange={(e) => setSelectedUser({ ...selectedUser, role: e.target.value })}
                                     required
-                                    className="p-2 border border-gray-300 rounded-md"
+                                    className="p-2 border rounded w-full"
                                 >
-                                    <option value="">Select Role</option>
-                                    {roles.map((role) => (
-                                        <option key={role.value} value={role.value}>
-                                            {role.label}
-                                        </option>
+                                    <option value="">Select a role</option>
+                                    {roles.map(role => (
+                                        <option key={role.value} value={role.value}>{role.label}</option>
                                     ))}
                                 </select>
-                            </div>
-                            <div className="mb-4">
-                                <label className="block text-sm font-bold mb-2">Added Date</label>
-                                <input
-                                    type="date"
-                                    name="addeddate"
-                                    value={selectedUser.addeddate || ''}
-                                    onChange={handleInputChange}
-                                    className="border rounded w-full py-2 px-3"
-                                />
                             </div>
                             <div className="mb-4">
                                 <label className="block text-sm font-bold mb-2">Profile Image</label>
@@ -253,16 +246,12 @@ const UserTable: React.FC = () => {
                                     type="file"
                                     accept="image/*"
                                     onChange={handleFileChange}
-                                    className="w-full py-2 px-3"
+                                    className="border rounded w-full py-2 px-3"
                                 />
                             </div>
                             <div className="flex justify-between">
-                                <button type="button" onClick={handleModalClose} className="bg-gray-400 text-white px-4 py-2 rounded mr-2">
-                                    Cancel
-                                </button>
-                                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
-                                    {isCreating ? 'Create' : 'Save'}
-                                </button>
+                                <button type="button" onClick={handleModalClose} className="mr-2 bg-gray-300 text-black py-2 px-4 rounded">Close</button>
+                                <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded">{isCreating ? 'Create' : 'Save'}</button>
                             </div>
                         </form>
                     </div>

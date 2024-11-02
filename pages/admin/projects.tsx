@@ -44,7 +44,7 @@ const ProjectsPage: React.FC = () => {
                         </div>
                     </div>
                     <div className="project-table">
-                        <ProjectTable searchQuery={searchQuery} /> {/* Pass searchQuery prop */}
+                        <ProjectTable searchQuery={searchQuery} />
                     </div>
                 </div>
             </div>

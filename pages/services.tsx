@@ -29,10 +29,10 @@ return (
             <h2 className="text-3xl font-bold mb-2 text-blue-400">Is Our Priority</h2>
             <p className="mt-4">We create user experience with accessibility in mind.</p>
             <p>We are here to give modern solutions to the modern problems.</p>
-            <Link href="/works" passHref>
+            {/* <Link href="/works" passHref>
             <button className="bg-blue-700 text-white justify-center mt-6
             hover:bg-gray-400 px-4 py-2 rounded">Our Work</button>
-            </Link>
+            </Link> */}
             <Image src="/work1.jpg" alt="Web Development" width={400} height={400}/>
         </div>
         <section className='mb-12'>
@@ -42,8 +42,6 @@ return (
                     <h3 className="text-2xl font-bold text-blue-400 mt-2">Website and Web App Development</h3>
                     <p className="mt-4">A Website is something that gives you and Your Business a web presence. </p>
                     <p>Here at CamAi, We exactly take care of that.</p>
-                    {/* <button className="bg-blue-700 text-white justify-center mt-5
-                    hover:bg-gray-400 px-4 py-2 rounded">More</button> */}
                 </div>
                 <Image src="/picture9.jpg" alt="Web Development" width={400} height={400} className='ml-44'/>
             </div>

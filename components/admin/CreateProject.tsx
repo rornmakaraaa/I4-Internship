@@ -16,6 +16,13 @@ type Project = {
     description: string;
 };
 
+const projectTypes = [
+    { value: "UX/UI Design", label: "UX/UI Design" },
+    { value: "Web Development", label: "Web Development" },
+    { value: "Mobile Development", label: "Mobile Development" },
+    { value: "Software Development", label: "Software Development" },
+];
+
 const CreateProject: React.FC<{ onProjectCreated: () => void }> = ({ onProjectCreated }) => {
     const router = useRouter();
     const [teams, setTeams] = useState<Team[]>([]);
@@ -76,22 +83,36 @@ const CreateProject: React.FC<{ onProjectCreated: () => void }> = ({ onProjectCr
                 >
                     &times;
                 </button>
-                <h2 className="text-xl font-bold mb-4">Create New Project</h2>
+                <h2 className="text-xl font-bold mb-4">Create Project</h2>
                 <form onSubmit={handleSubmit}>
-                    {["title", "type"].map((field) => (
-                        <div key={field} className="mb-4">
-                            <label className="block text-sm font-bold mb-2">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
-                            <input
-                                type="text"
-                                name={field}
-                                value={newProject[field as keyof Project] as string}
-                                onChange={handleChange}
-                                className="border rounded w-full py-2 px-3"
-                                required
-                            />
-                        </div>
-                    ))}
-
+                    <div className="mb-4">
+                        <label className="block text-sm font-bold mb-2">Title</label>
+                        <input
+                            type="text"
+                            name="title"
+                            value={newProject.title}
+                            onChange={handleChange}
+                            className="border rounded w-full py-2 px-3"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label className="block text-sm font-bold mb-2">Type</label>
+                        <select
+                            name="type"
+                            value={newProject.type}
+                            onChange={handleChange}
+                            className="border rounded w-full py-2 px-3"
+                            required
+                        >
+                            <option value="">Select Type</option>
+                            {projectTypes.map((type) => (
+                                <option key={type.value} value={type.value}>
+                                    {type.label}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                     <div className="mb-4">
                         <label className="block text-sm font-bold mb-2">Description</label>
                         <textarea
@@ -103,7 +124,6 @@ const CreateProject: React.FC<{ onProjectCreated: () => void }> = ({ onProjectCr
                             required
                         />
                     </div>
-
                     <div className="mb-4">
                         <label className="block text-sm font-bold mb-2">Status</label>
                         <select
@@ -118,7 +138,6 @@ const CreateProject: React.FC<{ onProjectCreated: () => void }> = ({ onProjectCr
                             <option value="Completed">Completed</option>
                         </select>
                     </div>
-
                     <div className="mb-4">
                         <label className="block text-sm font-bold mb-2">Team</label>
                         <select
@@ -135,7 +154,7 @@ const CreateProject: React.FC<{ onProjectCreated: () => void }> = ({ onProjectCr
                     <div className="flex justify-between">
                         <Link
                             href="/admin/projects"
-                            className="bg-gray-500 text-white hover:bg-gray-700 px-4 py-2 rounded ml-2 text-center"
+                            className="mr-2 bg-gray-300 text-black py-2 px-4 rounded"
                         >
                             Cancel
                         </Link>

@@ -20,14 +20,20 @@ interface ProjectTableProps {
     searchQuery: string;
 }
 
+const projectTypes = [
+    { value: "UX/UI Design", label: "UX/UI Design" },
+    { value: "Web Development", label: "Web Development" },
+    { value: "Mobile Development", label: "Mobile Development" },
+    { value: "Software Development", label: "Software Development" },
+    { value: "Analytics", label:"Analytics"}
+];
+
 const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
     const [projects, setProjects] = useState<Project[]>([]);
     const [teams, setTeams] = useState<Team[]>([]);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [showModal, setShowModal] = useState(false);
     const [expandedProjectId, setExpandedProjectId] = useState<number | null>(null);
-
-    const tableRef = useRef<HTMLTableElement>(null);
 
     useEffect(() => {
         const fetchProjects = async () => {
@@ -52,13 +58,11 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
         fetchTeams();
     }, []);
 
-    // Handle edit project
     const handleEdit = (project: Project) => {
         setSelectedProject(project);
         setShowModal(true);
     };
 
-    // Handle delete project
     const handleDelete = async (id: number) => {
         const confirmed = window.confirm("Are you sure you want to delete this project?");
         if (!confirmed) return;
@@ -70,8 +74,6 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
             console.error("Error deleting project:", error);
         }
     };
-
-    // Handle form input changes for the edit form
     const handleEditChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         if (selectedProject) {
@@ -81,8 +83,6 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
             }));
         }
     };
-
-    // Handle form submission for editing a project
     const handleEditSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (selectedProject && selectedProject.id) {
@@ -93,7 +93,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
                         project.id === selectedProject.id ? selectedProject : project
                     )
                 );
-                setShowModal(false); // Close modal after saving
+                setShowModal(false);
             } catch (error) {
                 console.error("Error updating project:", error);
             }
@@ -102,7 +102,6 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
         }
     };
 
-    // Filter projects based on search query
     const filteredProjects = projects.filter(
         (project) =>
             project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -111,7 +110,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
 
     return (
         <div className="overflow-x-auto mt-4">
-            <table ref={tableRef} className="min-w-full bg-white shadow-md rounded table-fixed">
+            <table className="min-w-full bg-white shadow-md rounded table-fixed">
                 <thead className="bg-gray-200 border-b border-gray-300 text-left h-10 rounded-lg">
                     <tr>
                         <th className="title px-2 py-2">Title</th>
@@ -168,7 +167,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
                                 <input
                                     type="text"
                                     name="title"
-                                    value={selectedProject?.title || ""}
+                                    value={selectedProject.title}
                                     onChange={handleEditChange}
                                     className="border rounded w-full py-2 px-3"
                                     required
@@ -176,20 +175,26 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
                             </div>
                             <div className="mb-4">
                                 <label className="block text-sm font-bold mb-2">Type</label>
-                                <input
-                                    type="text"
+                                <select
                                     name="type"
-                                    value={selectedProject?.type || ""}
+                                    value={selectedProject.type}
                                     onChange={handleEditChange}
                                     className="border rounded w-full py-2 px-3"
                                     required
-                                />
+                                >
+                                    <option value="">Select Type</option>
+                                    {projectTypes.map((type) => (
+                                        <option key={type.value} value={type.value}>
+                                            {type.label}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <label className="block text-sm font-bold mb-2">Description</label>
                                 <textarea
                                     name="description"
-                                    value={selectedProject?.description || ""}
+                                    value={selectedProject.description}
                                     onChange={handleEditChange}
                                     className="border rounded w-full py-2 px-3"
                                     rows={4}
@@ -200,7 +205,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
                                 <label className="block text-sm font-bold mb-2">Status</label>
                                 <select
                                     name="status"
-                                    value={selectedProject?.status || ""}
+                                    value={selectedProject.status}
                                     onChange={handleEditChange}
                                     className="border rounded w-full py-2 px-3"
                                     required
@@ -214,7 +219,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
                                 <label className="block text-sm font-bold mb-2">Team</label>
                                 <select
                                     name="team"
-                                    value={teams.find(team => team.name === selectedProject?.team)?.id || ""}
+                                    value={teams.find(team => team.name === selectedProject.team)?.id || ""}
                                     onChange={handleEditChange}
                                     className="border rounded w-full py-2 px-3"
                                 >
@@ -229,7 +234,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
                             <div className="flex justify-between">
                                 <button
                                     type="button"
-                                    className="bg-gray-500 text-white hover:bg-gray-700 px-4 py-2 rounded"
+                                    className="mr-2 bg-gray-300 text-black py-2 px-4 rounded"
                                     onClick={() => setShowModal(false)}
                                 >
                                     Cancel

@@ -10,13 +10,15 @@ interface ProjectData {
     id: number;
     title: string;
     type: string;
-    status: string;
+    status: 'In progress' | 'Completed';
     description: string;
 }
 
 interface ProjectCounts {
     website: number;
-    uiUx: number;
+    uxUi: number;
+    mobile: number;
+    software: number;
 }
 
 const HomePage = () => {
@@ -36,7 +38,7 @@ const HomePage = () => {
             setCurrentImageIndex((prevIndex) =>
                 prevIndex === bannerImages.length - 1 ? 0 : prevIndex + 1
             );
-        }, 3000);
+        }, 2000);
 
         return () => clearInterval(interval);
     }, []);
@@ -46,9 +48,11 @@ const HomePage = () => {
             try {
                 const response = await fetch('http://localhost:8000/api/projects');
                 const data = await response.json();
-                console.log("Fetched data:", data);  // Debug log
-                setProjectsData(data);
-                countCompletedProjects(data);
+                console.log("Fetched data:", data);
+                // Filter for completed projects only
+                const completedProjects = data.filter((project: ProjectData) => project.status === 'Completed');
+                setProjectsData(completedProjects);
+                countCompletedProjects(completedProjects); // Pass completed projects for counting
             } catch (error) {
                 console.error('Error fetching project data:', error);
             }
@@ -58,29 +62,26 @@ const HomePage = () => {
     }, []);
 
     const countCompletedProjects = (data: ProjectData[]) => {
-        const counts: ProjectCounts = { website: 0, uiUx: 0 };
+        const counts: ProjectCounts = { website: 0, uxUi: 0, mobile: 0, software: 0 };
 
         data.forEach(project => {
-            const status = project.status?.toLowerCase().trim();
             const type = project.type?.toLowerCase().trim();
 
-            if (status === "completed") {
-                if (type === "web development") {
-                    counts.website += 1;
-                } else if (type === "ui/ux design") {
-                    counts.uiUx += 1;
-                }
+            if (type === "web development") {
+                counts.website += 1;
+            } else if (type === "ux/ui design") {
+                counts.uxUi += 1;
+            } else if (type === "mobile development") {
+                counts.mobile += 1;
+            } else if (type === "software development") {
+                counts.software += 1;
             }
         });
 
         setProjectCounts(counts);
-        console.log("Completed Project Counts:", counts); // Debug log
+        console.log("Completed Project Counts:", counts);
     };
 
-    const openModal = (content: string) => {
-        setModalContent(content);
-        setShowModal(true);
-    };
 
     const closeModal = () => {
         setShowModal(false);
@@ -121,19 +122,20 @@ const HomePage = () => {
         }
     };
 
-    // Filter projects based on selected service
     const filteredProjects = selectedService && projectCounts ? projectsData.filter(project => {
         if (selectedService === 'website') {
             return project.type.toLowerCase() === "web development";
-        } else if (selectedService === 'uiUx') {
-            return project.type.toLowerCase() === "ui/ux design";
+        } else if (selectedService === 'uxUi') {
+            return project.type.toLowerCase() === "ux/ui design";
+        } else if (selectedService === 'mobile') {
+            return project.type.toLowerCase() === "mobile development";
+        } else if (selectedService === 'software') {
+            return project.type.toLowerCase() === "software development";
         }
         return false;
-    }) : [];
+    }) : projectsData;
 
     const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
-
-    // Render only the projects for the current page
     const renderProjects = () => {
         const startIndex = currentPage * projectsPerPage;
         const currentProjects = filteredProjects.slice(startIndex, startIndex + projectsPerPage);
@@ -145,21 +147,13 @@ const HomePage = () => {
                         <Image src="/picture8.jpg" alt={project.title} width={200} height={200} className="w-full h-auto" />
                         <div className="p-4">
                             <h3 className="font-semibold text-lg mb-2">{project.title}</h3>
-                            <Link href={`/projects/${project.id}`} className="text-blue-500 hover:underline">
-                                View Project
-                            </Link>
-                            {projectCounts && (
-                                <p className="text-sm text-gray-600">
-                                    Completed Projects: {projectCounts[selectedService as keyof ProjectCounts] || 0}
-                                </p>
-                            )}
+                            <p className="text-sm text-gray-600">{project.description}</p>
                         </div>
                     </div>
                 ))}
             </div>
         );
     };
-
     return (
         <div className="home">
             <header className="flex justify-center items-center py-4">
@@ -218,22 +212,32 @@ const HomePage = () => {
                         </div>
                     </div>
                 </section>
-
                 <h3 className="text-2xl font-bold px-10">Let's see what we've been working on</h3>
                 <p className="mb-8 px-10">Our Company Has Been Working On</p>
-
                 <div className="flex gap-4 mb-8 px-10">
                     <button
-                        className="border border-radius-40 hover:bg-gray-500 text-black font-bold py-2 px-4 rounded"
                         onClick={() => handleButtonClick('website')}
+                        className={`border rounded px-4 py-2 ${selectedService === 'website' ? 'bg-blue-500 text-white' : 'text-black'}`}
                     >
                         Website
                     </button>
                     <button
-                        className="border border-radius-40 hover:bg-gray-500 text-black font-bold py-2 px-4 rounded"
-                        onClick={() => handleButtonClick('uiUx')}
+                        onClick={() => handleButtonClick('uxUi')}
+                        className={`border rounded px-4 py-2 ${selectedService === 'uxUi' ? 'bg-blue-500 text-white' : 'text-black'}`}
                     >
-                        UI/UX
+                        UX/UI
+                    </button>
+                    <button
+                        onClick={() => handleButtonClick('mobile')}
+                        className={`border rounded px-4 py-2 ${selectedService === 'mobile' ? 'bg-blue-500 text-white' : 'text-black'}`}
+                    >
+                        Mobile Development
+                    </button>
+                    <button
+                        onClick={() => handleButtonClick('software')}
+                        className={`border rounded px-4 py-2 ${selectedService === 'software' ? 'bg-blue-500 text-white' : 'text-black'}`}
+                    >
+                        Software Development
                     </button>
                 </div>
                 {renderProjects()}
@@ -249,10 +253,9 @@ const HomePage = () => {
                     </div>
                 )}
             </main>
-            <Modal show={showModal} onClose={closeModal} title="Project Details">
-                <div>{modalContent}</div>
+            <Modal show={showModal} onClose={closeModal} title="Information">
+                <p>{modalContent}</p>
             </Modal>
-
             <Footer />
         </div>
     );
