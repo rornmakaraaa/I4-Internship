@@ -14,9 +14,8 @@ const port = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use('/uploads', express.static('uploads')); // Serve uploaded files
+app.use('/uploads', express.static('uploads'));
 
-// Route middlewares
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/teams', teamRoutes);

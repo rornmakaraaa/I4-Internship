@@ -1,4 +1,4 @@
-const db = require('../config/db'); // Update this path if necessary
+const db = require('../config/db');
 
 const dashboardController = {
     // Get the total number of projects
@@ -23,7 +23,6 @@ const dashboardController = {
         }
     },
 
-    // Additional dashboard-related stats can be added here
 };
 
 module.exports = dashboardController;
