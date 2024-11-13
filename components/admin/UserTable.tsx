@@ -21,6 +21,8 @@ const UserTable: React.FC<UserTableProps> = ({ searchTerm }) => {
     const [isCreating, setIsCreating] = useState(false);
     const [profileImage, setProfileImage] = useState<File | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [userToDelete, setUserToDelete] = useState<User | null>(null);
 
     const roles = [
         { value: 'admin', label: 'Admin' },
@@ -58,12 +60,12 @@ const UserTable: React.FC<UserTableProps> = ({ searchTerm }) => {
         setProfileImage(null);
     };
 
-    const handleDelete = async (userId: number) => {
-        const confirmDelete = window.confirm('Are you sure you want to delete this user?');
-        if (confirmDelete) {
+    const handleDelete = async () => {
+        if (userToDelete) {
             try {
-                await fetch(`http://localhost:8000/api/usermanage/${userId}`, { method: 'DELETE' });
-                setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userId));
+                await fetch(`http://localhost:8000/api/usermanage/${userToDelete.id}`, { method: 'DELETE' });
+                setUsers((prevUsers) => prevUsers.filter((user) => user.id !== userToDelete.id));
+                setShowDeleteModal(false);  // Close the delete confirmation modal
             } catch (error) {
                 setError('Failed to delete user');
             }
@@ -151,9 +153,15 @@ const UserTable: React.FC<UserTableProps> = ({ searchTerm }) => {
         setIsCreating(true);
     };
 
+    const handleShowDeleteModal = (user: User) => {
+        setUserToDelete(user);
+        setShowDeleteModal(true);
+    };
+
     if (error) {
         return <div>{error}</div>;
     }
+
     // Filter users based on searchTerm
     const filteredUsers = users.filter(user =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -188,7 +196,7 @@ const UserTable: React.FC<UserTableProps> = ({ searchTerm }) => {
                                     <button onClick={() => handleEdit(user)}>
                                         <FaEdit style={{ color: 'blue', cursor: 'pointer' }} />
                                     </button>
-                                    <button onClick={() => handleDelete(user.id)}>
+                                    <button onClick={() => handleShowDeleteModal(user)}>
                                         <FaTrash style={{ color: 'red', cursor: 'pointer' }} />
                                     </button>
                                 </div>
@@ -250,10 +258,23 @@ const UserTable: React.FC<UserTableProps> = ({ searchTerm }) => {
                                 />
                             </div>
                             <div className="flex justify-between">
-                                <button type="button" onClick={handleModalClose} className="mr-2 bg-gray-300 text-black py-2 px-4 rounded">Close</button>
+                                <button type="button" onClick={handleModalClose} className="mr-2 border text-black py-2 px-4 rounded">Close</button>
                                 <button type="submit" className="bg-blue-900 text-white py-2 px-4 rounded">{isCreating ? 'Create' : 'Save'}</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            )}
+            {/* Delete Confirmation Modal */}
+            {showDeleteModal && userToDelete && (
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50">
+                    <div className="bg-white p-6 rounded shadow-lg w-1/3">
+                        <h3 className="text-xl font-bold mb-4">Are you sure to delete this user?</h3>
+                        <p className="mb-4">{userToDelete.name} ({userToDelete.email})</p>
+                        <div className="flex justify-between">
+                            <button onClick={() => setShowDeleteModal(false)} className="mr-2 border text-black py-2 px-4 rounded">Cancel</button>
+                            <button onClick={handleDelete} className="bg-red-600 text-white py-2 px-4 rounded">Delete</button>
+                        </div>
                     </div>
                 </div>
             )}

@@ -162,7 +162,7 @@ const CreateUser: React.FC<CreateUserProps> = ({ onUserCreated, onClose }) => {
                     <button
                         type="button"
                         onClick={handleClose}
-                        className="mr-2 bg-gray-300 text-black py-2 px-4 rounded"
+                        className="mr-2 border text-black py-2 px-4 rounded"
                     >
                         Cancel
                     </button>
