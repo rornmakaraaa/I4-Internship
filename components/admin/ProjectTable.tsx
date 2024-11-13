@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import axios from "axios";
 
@@ -33,6 +33,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
     const [teams, setTeams] = useState<Team[]>([]);
     const [selectedProject, setSelectedProject] = useState<Project | null>(null);
     const [showModal, setShowModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [expandedProjectId, setExpandedProjectId] = useState<number | null>(null);
 
     useEffect(() => {
@@ -63,17 +64,29 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
         setShowModal(true);
     };
 
-    const handleDelete = async (id: number) => {
-        const confirmed = window.confirm("Are you sure you want to delete this project?");
-        if (!confirmed) return;
+    const handleDelete = (project: Project) => {
+        setSelectedProject(project);
+        setShowDeleteModal(true);
+    };
 
-        try {
-            await axios.delete(`http://localhost:8000/api/projects/${id}`);
-            setProjects((prevProjects) => prevProjects.filter((project) => project.id !== id));
-        } catch (error) {
-            console.error("Error deleting project:", error);
+    const confirmDelete = async () => {
+        if (selectedProject && selectedProject.id) {
+            try {
+                await axios.delete(`http://localhost:8000/api/projects/${selectedProject.id}`);
+                setProjects((prevProjects) => prevProjects.filter((project) => project.id !== selectedProject.id));
+                setShowDeleteModal(false);
+            } catch (error) {
+                console.error("Error deleting project:", error);
+            }
+        } else {
+            console.error("Invalid project data for deletion");
         }
     };
+
+    const cancelDelete = () => {
+        setShowDeleteModal(false);
+    };
+
     const handleEditChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         if (selectedProject) {
@@ -83,6 +96,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
             }));
         }
     };
+
     const handleEditSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (selectedProject && selectedProject.id) {
@@ -107,7 +121,6 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
             project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
             project.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
-
     return (
         <div className="overflow-x-auto mt-4">
             <table className="min-w-full bg-white shadow-md rounded table-fixed">
@@ -150,13 +163,36 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
                             <td className="py-2 justify-center">
                                 <div className="flex space-x-2">
                                     <FaEdit style={{ color: "blue", cursor: "pointer" }} onClick={() => handleEdit(project)} />
-                                    <FaTrash style={{ color: "red", cursor: "pointer" }} onClick={() => handleDelete(project.id)} />
+                                    <FaTrash style={{ color: "red", cursor: "pointer" }} onClick={() => handleDelete(project)} />
                                 </div>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            {/* Delete Confirmation Modal */}
+            {showDeleteModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50">
+                    <div className="bg-white p-6 rounded shadow-lg w-1/3">
+                        <h2 className="text-center font-semibold">Are you sure to delete this project?</h2>
+                        <div className="flex justify-between mt-4">
+                            <button
+                                onClick={cancelDelete}
+                                className="border text-black py-2 px-2 rounded"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={confirmDelete}
+                                className="bg-red-500 text-white hover:bg-red-700 py-2 px-2 rounded"
+                            >
+                                Confirm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* Edit Project Modal */}
             {showModal && selectedProject && (
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow-lg w-1/2">
@@ -234,7 +270,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
                             <div className="flex justify-between">
                                 <button
                                     type="button"
-                                    className="mr-2 bg-gray-300 text-black py-2 px-4 rounded"
+                                    className="mr-2 border text-black py-2 px-4 rounded"
                                     onClick={() => setShowModal(false)}
                                 >
                                     Cancel

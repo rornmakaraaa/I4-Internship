@@ -154,7 +154,7 @@ const CreateProject: React.FC<{ onProjectCreated: () => void }> = ({ onProjectCr
                     <div className="flex justify-between">
                         <Link
                             href="/admin/projects"
-                            className="mr-2 bg-gray-300 text-black py-2 px-4 rounded"
+                            className="mr-2 border text-black py-2 px-4 rounded"
                         >
                             Cancel
                         </Link>

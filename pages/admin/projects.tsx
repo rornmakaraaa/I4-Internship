@@ -20,11 +20,8 @@ const ProjectsPage: React.FC = () => {
                     </div>
                     <div className="flex items-center justify-between mb-4">
                         <div className="flex">
-                            <Link href="/admin/projects" className="bg-blue-900 text-white font-semibold py-2 px-4 hover:bg-gray-500 rounded-l-lg">
+                            <Link href="/admin/projects" className="bg-blue-900 text-white font-semibold py-2 px-4 hover:bg-gray-500 rounded-lg">
                                 All Projects
-                            </Link>
-                            <Link href="/admin/trash" className="bg-gray-200 text-gray-700 font-semibold py-2 px-4 hover:bg-gray-500 rounded-r-lg">
-                                Trash
                             </Link>
                         </div>
                         <div className="flex items-center ml-4">

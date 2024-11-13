@@ -251,7 +251,7 @@ const UserTable: React.FC<UserTableProps> = ({ searchTerm }) => {
                             </div>
                             <div className="flex justify-between">
                                 <button type="button" onClick={handleModalClose} className="mr-2 bg-gray-300 text-black py-2 px-4 rounded">Close</button>
-                                <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded">{isCreating ? 'Create' : 'Save'}</button>
+                                <button type="submit" className="bg-blue-900 text-white py-2 px-4 rounded">{isCreating ? 'Create' : 'Save'}</button>
                             </div>
                         </form>
                     </div>
