@@ -20,7 +20,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/teams', teamRoutes);
 app.use('/api/dashboard', dashboardRoutes);
-app.use('/api', userRoutes);
+app.use('/api/', userRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

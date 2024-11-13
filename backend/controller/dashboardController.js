@@ -11,7 +11,6 @@ const dashboardController = {
             return res.status(500).json({ error: 'Database error occurred' });
         }
     },
-
     // Get the total number of teams
     getTotalTeams: async (req, res) => {
         try {
