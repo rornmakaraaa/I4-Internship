@@ -1,38 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function Header() {
+  const [usernameInitial, setUsernameInitial] = useState<string | null>(null);
+
+  // Retrieve the first letter of the username from localStorage when the component mounts
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsernameInitial(storedUsername.charAt(0).toUpperCase());
+    }
+  }, []);
+
   return (
-    <header className="header">
-      <h1 className="font-bold text-4xl text-white">CamAi</h1>
-      <div className="user-info">
-        <div className="user-avatar">
-          <img src="/profile.jpg" alt="Mama" />
-        </div>
+    <header className="flex justify-between items-center p-4 bg-blue-800 text-white border-b border-gray-300">
+      <h1 className="font-bold text-4xl">CamAi</h1>
+      <div className="flex items-center space-x-4">
+        {usernameInitial && (
+          <div className="w-8 h-8 flex justify-center items-center rounded-full bg-white text-blue-800 font-semibold text-lg">
+            {usernameInitial}
+          </div>
+        )}
       </div>
-      <style jsx>{`
-        .header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 10px 20px;
-          background-color: #1E3A8A;
-          border-bottom: 1px solid #ddd;
-        }
-        .user-info {
-          display: flex;
-          align-items: center;
-        }
-        .user-avatar img {
-          border-radius: 50%;
-          width: 32px;
-          height: 32px;
-          margin-right: 10px;
-        }
-        .user-name {
-          font-size: 20px;
-          font-weight: bold;
-        }
-      `}</style>
     </header>
   );
 }

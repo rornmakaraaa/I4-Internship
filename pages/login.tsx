@@ -24,6 +24,8 @@ const Login: React.FC = () => {
       const data = await response.json();
       if (response.ok) {
         setSuccess('Login successful!');
+        // Store the first letter of the username in localStorage
+        localStorage.setItem('username', username.charAt(0).toUpperCase());
         router.push('/admin/dashboard');
       } else {
         setError(data.message || 'Login failed');

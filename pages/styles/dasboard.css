@@ -19,24 +19,6 @@
   align-items: center;
   margin-bottom: 20px;
 }
-.search-bar {
-  display: flex;
-  align-items: center;
-}
-.search-bar input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-.search-bar button {
-  margin-left: 10px;
-  background-color: blue;
-  color: #fff;
-  padding: 8px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
 .top-cards {
   display: flex;
   justify-content: space-between;

@@ -28,6 +28,8 @@ const Signup: React.FC = () => {
       if (response.ok) {
         setSuccess('Signup successful!');
         setError('');
+        // Store the first letter of the username in localStorage
+        localStorage.setItem('username', username.charAt(0).toUpperCase());
         router.push('/admin/dashboard');
       } else {
         setError(data.message || 'Signup failed');

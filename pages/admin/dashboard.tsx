@@ -31,7 +31,6 @@ const Dashboard = () => {
     const projectsToShow = showMoreProjects
         ? recentProjectsData
         : recentProjectsData.slice(0, 4);
-
     // Fetch total projects from API
     useEffect(() => {
         const fetchTotalProjects = async () => {
@@ -60,13 +59,6 @@ const Dashboard = () => {
                 <div className="main-content">
                     <div className="top-bar">
                         <h2 className="font-bold text-2xl">Dashboard</h2>
-                        <button className="flex items-center bg-gray-200 rounded-lg py-2 px-2">
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                className="border-none outline-none bg-transparent w-24" />
-                            <FaSearch className="text-gray-500 ml-2" style={{ fontSize: '20px' }} />
-                        </button>
                     </div>
                     <div className="top-cards">
                         <div className="card total-customers">
