@@ -24,14 +24,11 @@ const about = () => {
             </div>
         </header>
         <main className="mt-8">
-            <div className="mb-8 text-center">
+            {/* <div className="mb-8 text-center">
                 <h2 className="text-3xl font-bold mb-2">We are helping people with</h2>
                 <h2 className="text-3xl font-bold mb-2 text-blue-400">building their brands</h2>
                 <p className="mt-4">Global digital agency offering advertising and digital solutions for clients.</p>
                 <Image src="/work4.jpg" alt="Our Story" width={450} height={200} className="mx-auto" />
-            </div>
-            {/* <div className="flex justify-center">
-                <button className="bg-blue-500 text-white w-28 h-10 rounded-2xl hover:bg-pink-100">Our Story</button>
             </div> */}
             <section className="mb-12">
                 <div className="flex">

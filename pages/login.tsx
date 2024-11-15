@@ -60,10 +60,10 @@ const Login: React.FC = () => {
           <div className="w-full md:w-1/2 p-8">
             <div className="flex justify-center mb-6">
               <div className="flex space-x-4">
-                <button className="text-lg font-semibold text-blue-700 border-b-2 border-blue-700 focus:outline-none">
+                <button className="text-lg font-bold text-blue-700 border-b-2 border-blue-700 focus:outline-none">
                   Login
                 </button>
-                <button className="text-lg font-semibold text-gray-500 focus:outline-none">
+                <button className="text-lg font-bold text-gray-500 focus:outline-none">
                   <Link href="/signup">Sign Up</Link>
                 </button>
               </div>
