@@ -29,10 +29,6 @@ return (
             <h2 className="text-3xl font-bold mb-2 text-blue-400">Is Our Priority</h2>
             <p className="mt-4">We create user experience with accessibility in mind.</p>
             <p>We are here to give modern solutions to the modern problems.</p>
-            {/* <Link href="/works" passHref>
-            <button className="bg-blue-700 text-white justify-center mt-6
-            hover:bg-gray-400 px-4 py-2 rounded">Our Work</button>
-            </Link> */}
             <Image src="/work1.jpg" alt="Web Development" width={400} height={400}/>
         </div>
         <section className='mb-12'>
@@ -54,19 +50,14 @@ return (
                     <p className="mt-4">Progressive web apps are the future of
                         modern web</p>
                     <p>and we understand that as We've been working with those</p>
-                    {/* <button className="bg-blue-700 text-white justify-center mt-5
-                    hover:bg-gray-400 px-4 py-2 rounded">More</button> */}
                 </div>
             </div>
-
             <div className="flex">
                 <div className='px-10 mt-8'>
                     <h3 className="text-2xl font-bold">User interface Design</h3>
                     <h3 className="text-2xl font-bold text-blue-400 mt-2">User interface and User experience design</h3>
                     <p className="mt-4">As a Design focused digital agency we are highly</p>
                     <p>concerned about the overall product design.</p>
-                    {/* <button className="bg-blue-700 text-white justify-center mt-5
-                    hover:bg-gray-400 px-4 py-2 rounded">More</button> */}
                 </div>
                 <Image src="/picture11.jpg" alt="Web Development" width={400} height={400} className='ml-44'/>
             </div>

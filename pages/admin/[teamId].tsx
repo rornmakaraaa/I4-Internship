@@ -9,8 +9,8 @@ interface TeamMember {
     id: number;
     name: string;
     role: string;
-    status: 'Active' | 'Inactive';
-    gender: 'Male' | 'Female' | 'Other';
+    status: 'Active' | 'Inactive' | '';
+    gender: 'Male' | 'Female' | 'Other' | '';
 }
 
 const TeamMemberPage: React.FC = () => {
@@ -20,7 +20,9 @@ const TeamMemberPage: React.FC = () => {
     const [editMember, setEditMember] = useState<TeamMember | null>(null);
     const [formData, setFormData] = useState<Omit<TeamMember, 'id'>>({ name: '', role: '', status: '', gender: '' });
     const [formError, setFormError] = useState<string | null>(null);
-    const [showForm, setShowForm] = useState<boolean>(false); // Control form visibility
+    const [showForm, setShowForm] = useState<boolean>(false);
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+    const [memberToDelete, setMemberToDelete] = useState<number | null>(null);
     const router = useRouter();
     const { teamId } = router.query;
 
@@ -49,13 +51,26 @@ const TeamMemberPage: React.FC = () => {
         setShowForm(true);
     };
 
-    const handleDelete = async (id: number) => {
-        try {
-            await axios.delete(`http://localhost:8000/api/teams/${teamId}/members/${id}`);
-            setMembers(members.filter((member) => member.id !== id));
-        } catch (error) {
-            console.error('Error deleting member:', error);
+    const handleDelete = async () => {
+        if (memberToDelete !== null) {
+            try {
+                await axios.delete(`http://localhost:8000/api/teams/${teamId}/members/${memberToDelete}`);
+                setMembers(members.filter((member) => member.id !== memberToDelete));
+                setShowDeleteModal(false);
+            } catch (error) {
+                console.error('Error deleting member:', error);
+            }
         }
+    };
+
+    const handleDeleteClick = (id: number) => {
+        setMemberToDelete(id);
+        setShowDeleteModal(true);
+    };
+
+    const handleCancelDelete = () => {
+        setShowDeleteModal(false);
+        setMemberToDelete(null);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -90,6 +105,7 @@ const TeamMemberPage: React.FC = () => {
             setFormError('Failed to save member');
         }
     };
+
     const handleBack = () => {
         router.push('/admin/team');
     };
@@ -104,7 +120,6 @@ const TeamMemberPage: React.FC = () => {
                 <Sidebar />
                 <div className="main flex-grow p-5">
                     <h1 className="text-2xl font-bold mb-4">Team Members</h1>
-                    {/* Add Member Button */}
                     <div className="mb-4 flex justify-between">
                         <button
                             onClick={handleBack}
@@ -123,7 +138,6 @@ const TeamMemberPage: React.FC = () => {
                             <FaUserPlus className='inline mr-1'/>Add Member
                         </button>
                     </div>
-                    {/* Member List */}
                     <ul>
                         {members.map((member) => (
                             <li key={member.id} className="border p-2 mb-2 rounded shadow flex justify-between items-center">
@@ -131,7 +145,7 @@ const TeamMemberPage: React.FC = () => {
                                     <h2 className="font-bold">{member.name}</h2>
                                     <p>Role: {member.role}</p>
                                     <p>Status: {member.status}</p>
-                                    <p>Gender: {member.gender}</p> {/* Display gender */}
+                                    <p>Gender: {member.gender}</p>
                                 </div>
                                 <div className="flex space-x-2">
                                     <button
@@ -141,7 +155,7 @@ const TeamMemberPage: React.FC = () => {
                                         <FaEdit className="mr-1" /> Edit
                                     </button>
                                     <button
-                                        onClick={() => handleDelete(member.id)}
+                                        onClick={() => handleDeleteClick(member.id)}
                                         className="text-red-600 hover:underline flex items-center"
                                     >
                                         <FaTrash className="mr-1" /> Delete
@@ -150,7 +164,6 @@ const TeamMemberPage: React.FC = () => {
                             </li>
                         ))}
                     </ul>
-                    {/* Form Modal (Toggle visibility) */}
                     {showForm && (
                         <div className="modal fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
                             <div className="bg-white p-6 rounded shadow-md w-1/3">
@@ -175,12 +188,12 @@ const TeamMemberPage: React.FC = () => {
                                         className="border p-2 rounded mr-2 w-full mb-2"
                                     />
                                     <select name="status" value={formData.status} onChange={handleChange} className="border p-2 rounded mb-2 w-full">
-                                        <option value="Status">Status</option>
+                                        <option value="">Select Status</option>
                                         <option value="Active">Active</option>
                                         <option value="Inactive">Inactive</option>
                                     </select>
                                     <select name="gender" value={formData.gender} onChange={handleChange} className="border p-2 rounded mb-2 w-full">
-                                        <option value="">Please choose your gender</option> {/* Updated value */}
+                                        <option value="">Select Gender</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Other">Other</option>
@@ -199,6 +212,29 @@ const TeamMemberPage: React.FC = () => {
                                     </div>
                                 </form>
                                 {formError && <p className="text-red-600">{formError}</p>}
+                            </div>
+                        </div>
+                    )}
+                    {/* Delete Confirmation Modal */}
+                    {showDeleteModal && (
+                        <div className="modal fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+                            <div className="bg-white p-6 rounded shadow-md w-1/3">
+                                <h2 className="text-xl font-bold mb-4">Confirm Delete</h2>
+                                <p>Are you sure to delete this member?</p>
+                                <div className="flex justify-between mt-4">
+                                    <button
+                                        onClick={handleCancelDelete}
+                                        className="border text-black py-2 px-4 rounded"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        onClick={handleDelete}
+                                        className="bg-red-600 text-white py-2 px-4 rounded"
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )}

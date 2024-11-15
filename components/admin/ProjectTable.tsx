@@ -175,7 +175,7 @@ const ProjectTable: React.FC<ProjectTableProps> = ({ searchQuery }) => {
                 <div className="fixed inset-0 flex items-center justify-center bg-gray-600 bg-opacity-50">
                     <div className="bg-white p-6 rounded shadow-lg w-1/3">
                         <h2 className="text-center font-semibold">Are you sure to delete this project?</h2>
-                        <div className="flex justify-between mt-4">
+                        <div className="flex justify-center space-x-2 mt-4">
                             <button
                                 onClick={cancelDelete}
                                 className="border text-black py-2 px-2 rounded"

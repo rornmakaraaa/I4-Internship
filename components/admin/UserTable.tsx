@@ -271,7 +271,7 @@ const UserTable: React.FC<UserTableProps> = ({ searchTerm }) => {
                     <div className="bg-white p-6 rounded shadow-lg w-1/3">
                         <h3 className="text-xl font-bold mb-4">Are you sure to delete this user?</h3>
                         <p className="mb-4">{userToDelete.name} ({userToDelete.email})</p>
-                        <div className="flex justify-between">
+                        <div className="flex justify-center space-x-2">
                             <button onClick={() => setShowDeleteModal(false)} className="mr-2 border text-black py-2 px-4 rounded">Cancel</button>
                             <button onClick={handleDelete} className="bg-red-600 text-white py-2 px-4 rounded">Delete</button>
                         </div>

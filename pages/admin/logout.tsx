@@ -29,7 +29,7 @@ const Logout = () => {
                             Logout
                         </button>
                         <button
-                            className="bg-gray-500 text-white py-2 px-4 rounded"
+                            className="border  py-2 px-4 rounded"
                             onClick={handleCancel}>
                             Back
                         </button>
